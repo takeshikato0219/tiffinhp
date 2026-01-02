@@ -1,0 +1,426 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --yellow: #f3d2c1;
+  --dark-teal: #1b4451;
+  --light-blue: #64b9d0;
+  --light-gray: #f9fafa;
+  --muted-blue: #a7bdc5;
+  --text-dark: #333333;
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --border: 240 5.9% 90%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-white text-foreground;
+    font-family: 'Noto Sans JP', 'Overpass', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Overpass', 'Noto Sans JP', sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted-blue);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-teal);
+}
+
+/* Link hover animation */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(1);
+  transition: transform 0.3s ease;
+}
+
+.link-underline:hover::after {
+  transform: scaleX(0);
+}
+
+/* Animated circles */
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(30px, -30px) scale(1.05);
+  }
+  50% {
+    transform: translate(-25px, 80px) scale(0.95);
+  }
+  75% {
+    transform: translate(20px, 50px) scale(1.02);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes morph {
+  0%, 100% {
+    border-radius: 50%;
+  }
+  25% {
+    border-radius: 55% 45% 35% 65% / 55% 35% 65% 45%;
+  }
+  50% {
+    border-radius: 35% 65% 55% 45% / 45% 55% 35% 65%;
+  }
+  75% {
+    border-radius: 45% 55% 50% 50% / 50% 50% 45% 55%;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(13, 115, 119, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(13, 115, 119, 0.6);
+  }
+}
+
+@keyframes float-morph-rotate {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    border-radius: 50%;
+  }
+  16.66% {
+    transform: translate(35px, -30px) rotate(60deg) scale(1.08);
+    border-radius: 55% 45% 35% 65% / 55% 35% 65% 45%;
+  }
+  33.33% {
+    transform: translate(-30px, 70px) rotate(120deg) scale(0.92);
+    border-radius: 35% 65% 55% 45% / 45% 55% 35% 65%;
+  }
+  50% {
+    transform: translate(25px, 120px) rotate(180deg) scale(1.05);
+    border-radius: 50% 50% 40% 60% / 60% 40% 50% 50%;
+  }
+  66.66% {
+    transform: translate(-25px, 80px) rotate(240deg) scale(0.98);
+    border-radius: 45% 55% 50% 50% / 50% 50% 45% 55%;
+  }
+  83.33% {
+    transform: translate(30px, 50px) rotate(300deg) scale(1.03);
+    border-radius: 60% 40% 50% 50% / 50% 50% 60% 40%;
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg) scale(1);
+    border-radius: 50%;
+  }
+}
+
+/* Chat button animation - smaller movement range */
+@keyframes chat-float-morph-rotate {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    border-radius: 50%;
+  }
+  16.66% {
+    transform: translate(8px, -8px) rotate(60deg) scale(1.05);
+    border-radius: 55% 45% 35% 65% / 55% 35% 65% 45%;
+  }
+  33.33% {
+    transform: translate(-6px, 12px) rotate(120deg) scale(0.95);
+    border-radius: 35% 65% 55% 45% / 45% 55% 35% 65%;
+  }
+  50% {
+    transform: translate(6px, 15px) rotate(180deg) scale(1.03);
+    border-radius: 50% 50% 40% 60% / 60% 40% 50% 50%;
+  }
+  66.66% {
+    transform: translate(-5px, 10px) rotate(240deg) scale(0.98);
+    border-radius: 45% 55% 50% 50% / 50% 50% 45% 55%;
+  }
+  83.33% {
+    transform: translate(7px, 8px) rotate(300deg) scale(1.02);
+    border-radius: 60% 40% 50% 50% / 50% 50% 60% 40%;
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg) scale(1);
+    border-radius: 50%;
+  }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-rotate {
+  animation: rotate 20s linear infinite;
+}
+
+.animate-morph {
+  animation: morph 10s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-float-morph-rotate {
+  animation: float-morph-rotate 12s ease-in-out infinite;
+}
+
+.animate-chat-float-morph-rotate {
+  animation: chat-float-morph-rotate 12s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
+/* Tab hover effect */
+.tab-hover {
+  transition: all 0.3s ease;
+}
+
+.tab-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Background circles animation */
+@keyframes slowFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes slowFloatReverse {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+}
+
+.animate-slow-float {
+  animation: slowFloat 6s ease-in-out infinite;
+}
+
+.animate-slow-float-reverse {
+  animation: slowFloatReverse 6s ease-in-out infinite;
+}
+
+/* Logo dot animation */
+@keyframes dotPulse {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  10% {
+    transform: translate(-10px, 2px) scale(1);
+  }
+  20% {
+    transform: translate(-12px, 2px) scale(1);
+  }
+  30% {
+    transform: translate(-13px, 3px) scale(1.01);
+  }
+  40% {
+    transform: translate(-12px, 4px) scale(1.02);
+  }
+  50% {
+    transform: translate(-10px, 5px) scale(1.03);
+  }
+  60% {
+    transform: translate(-8px, 6px) scale(1.02);
+  }
+  70% {
+    transform: translate(-5px, 7px) scale(1.01);
+  }
+  80% {
+    transform: translate(-2px, 8px) scale(1);
+  }
+  90% {
+    transform: translate(2px, 7px) scale(1);
+  }
+}
+
+.animate-dot-pulse {
+  animation: dotPulse 24s ease-in-out infinite;
+}
+
+.animate-dot-bounce {
+  animation: dotBounce 24s ease-in-out infinite;
+}
+
+@keyframes dotBounce {
+  0%, 100% {
+    transform: translate(-13px, 3px) scale(1.03) rotate(0deg);
+  }
+  5% {
+    transform: translate(-12px, 4px) scale(1.03) rotate(5deg);
+  }
+  10% {
+    transform: translate(-10px, 5px) scale(1.03) rotate(-5deg);
+  }
+  15% {
+    transform: translate(-8px, 6px) scale(1.03) rotate(3deg);
+  }
+  20% {
+    transform: translate(-5px, 7px) scale(1.03) rotate(-3deg);
+  }
+  25% {
+    transform: translate(-2px, 8px) scale(1.03) rotate(2deg);
+  }
+  30% {
+    transform: translate(2px, 7px) scale(1.03) rotate(-2deg);
+  }
+  35% {
+    transform: translate(5px, 6px) scale(1.03) rotate(1deg);
+  }
+  40% {
+    transform: translate(8px, 5px) scale(1.03) rotate(-1deg);
+  }
+  45% {
+    transform: translate(10px, 4px) scale(1.03) rotate(0deg);
+  }
+  50% {
+    transform: translate(12px, 3px) scale(1.03) rotate(0deg);
+  }
+  55% {
+    transform: translate(15px, 2px) scale(1.03) rotate(0deg);
+  }
+  60% {
+    transform: translate(18px, 1px) scale(1.03) rotate(0deg);
+  }
+  65% {
+    transform: translate(20px, 0px) scale(1.03) rotate(0deg);
+  }
+  70% {
+    transform: translate(18px, -1px) scale(1.03) rotate(0deg);
+  }
+  75% {
+    transform: translate(15px, -2px) scale(1.03) rotate(0deg);
+  }
+  80% {
+    transform: translate(12px, -1px) scale(1.03) rotate(0deg);
+  }
+  85% {
+    transform: translate(10px, 0px) scale(1.03) rotate(0deg);
+  }
+  90% {
+    transform: translate(8px, 1px) scale(1.03) rotate(0deg);
+  }
+  95% {
+    transform: translate(5px, 2px) scale(1.03) rotate(0deg);
+  }
+}

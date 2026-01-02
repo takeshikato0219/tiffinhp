@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ai-shift.com/sitemap.xml
+
