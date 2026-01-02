@@ -160,7 +160,7 @@ export default function HeroSection() {
           }`}
         >
           <h1 
-            className={`font-bold text-gray-900 leading-tight min-h-[80px] md:min-h-[180px] flex flex-col justify-center text-[50px] ${
+            className={`font-bold text-gray-900 leading-tight min-h-[80px] md:min-h-[180px] flex flex-col justify-center text-[38px] md:text-[50px] ${
               currentMessageIndex === 2 ? 'mt-[15px]' : ''
             }`} 
             itemProp="headline"

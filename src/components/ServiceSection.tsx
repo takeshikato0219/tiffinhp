@@ -69,6 +69,12 @@ export default function ServiceSection() {
                   ITシステムの開発にAIを組み込んだ開発を軸にしています。既存のITシステムにAI機能を統合する開発や、AIを中核とした新規ITシステム開発まで対応可能です。
                 </p>
               </div>
+              <div className="space-y-2 md:space-y-3 group/item">
+                <h3 className="text-base md:text-lg font-bold text-gray-900 group-hover/item:text-teal-dark transition-colors">エッジ処理</h3>
+                <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
+                  エッジ処理の開発・実装を得意としています。エッジコンピューティング環境でのAI処理、リアルタイムデータ処理、エッジデバイス向けの最適化など、エッジ処理に関する包括的なサポートを提供します。
+                </p>
+              </div>
             </div>
             </Link>
           </div>
@@ -117,12 +123,6 @@ export default function ServiceSection() {
                 <h3 className="text-base md:text-lg font-bold text-gray-900 group-hover/item:text-teal-dark transition-colors">画像処理</h3>
                 <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
                   画像処理の開発・実装を専門としています。画像の前処理・後処理、画像解析、画像変換など、あらゆる画像処理技術に対応。高品質な画像処理ソリューションを提供します。
-                </p>
-              </div>
-              <div className="space-y-2 md:space-y-3 group/item">
-                <h3 className="text-base md:text-lg font-bold text-gray-900 group-hover/item:text-teal-dark transition-colors">エッジ処理</h3>
-                <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
-                  エッジ処理の開発・実装を得意としています。エッジコンピューティング環境でのAI処理、リアルタイムデータ処理、エッジデバイス向けの最適化など、エッジ処理に関する包括的なサポートを提供します。
                 </p>
               </div>
             </div>
