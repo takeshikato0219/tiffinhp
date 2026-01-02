@@ -31,7 +31,7 @@ export function useScrollAnimation(options?: IntersectionObserverInit) {
         observer.disconnect();
       }
     };
-  }, []);
+  }, [options]);
 
   return { ref, isVisible };
 }

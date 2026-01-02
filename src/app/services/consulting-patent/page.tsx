@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Breadcrumb from "@/components/Breadcrumb";
 import BackgroundCircles from "@/components/BackgroundCircles";
 import Link from "next/link";
 import { Metadata } from "next";
