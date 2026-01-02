@@ -91,12 +91,22 @@ export default function AIDevelopmentPage() {
           </div>
 
           <div className="mt-12 text-center">
-            <a
+            <Link
               href="/"
               className="inline-block bg-teal-dark text-white px-8 py-3 rounded-lg font-medium hover:bg-teal-dark/90 transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = '/';
+                setTimeout(() => {
+                  const element = document.getElementById('contact');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }, 100);
+              }}
             >
               お問い合わせはこちら
-            </a>
+            </Link>
           </div>
         </div>
       </section>
