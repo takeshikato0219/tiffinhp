@@ -66,19 +66,22 @@ export default function CompanySection() {
               </div>
             </div>
 
-            <a
-              href="#contact"
+            <Link
+              href="/"
               className="inline-block text-sm font-medium text-gray-900 hover:text-teal-dark transition-colors link-underline"
               onClick={(e) => {
                 e.preventDefault();
-                const element = document.getElementById('contact');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
+                window.location.href = '/';
+                setTimeout(() => {
+                  const element = document.getElementById('contact');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }, 100);
               }}
             >
               お問い合わせはこちら
-            </a>
+            </Link>
           </div>
 
           {/* Company Information */}

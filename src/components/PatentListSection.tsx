@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 interface Patent {
@@ -530,12 +531,22 @@ export default function PatentListSection() {
           <p className="text-sm text-gray-600 mb-4">
             特許に関するお問い合わせは、お問い合わせフォームよりご連絡ください。
           </p>
-          <a
-            href="#contact"
+          <Link
+            href="/"
             className="inline-block text-sm font-medium text-teal-dark hover:text-teal-dark/80 transition-colors link-underline"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = '/';
+              setTimeout(() => {
+                const element = document.getElementById('contact');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }, 100);
+            }}
           >
             お問い合わせはこちら
-          </a>
+          </Link>
         </div>
       </div>
     </section>

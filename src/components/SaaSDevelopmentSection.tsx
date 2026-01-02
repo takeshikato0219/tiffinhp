@@ -27,15 +27,18 @@ export default function SaaSDevelopmentSection() {
                 協業型SaaS開発に関するお問い合わせはこちら
               </p>
             </div>
-            <a
-              href="#contact"
+            <Link
+              href="/"
               className="flex items-center gap-1.5 text-xs md:text-sm font-medium text-gray-900 hover:text-teal-dark transition-colors whitespace-nowrap"
               onClick={(e) => {
                 e.preventDefault();
-                const element = document.getElementById('contact');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
+                window.location.href = '/';
+                setTimeout(() => {
+                  const element = document.getElementById('contact');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }, 100);
               }}
             >
               READ MORE
@@ -153,19 +156,22 @@ export default function SaaSDevelopmentSection() {
 
             {/* CTA */}
             <div className="text-center">
-              <a
-                href="#contact"
+              <Link
+                href="/"
                 className="inline-block bg-teal-dark text-white px-8 py-3 rounded-lg font-medium hover:bg-teal-dark/90 transition-all duration-300 hover:scale-105"
                 onClick={(e) => {
                   e.preventDefault();
-                  const element = document.getElementById('contact');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
+                  window.location.href = '/';
+                  setTimeout(() => {
+                    const element = document.getElementById('contact');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }, 100);
                 }}
               >
                 協業型SaaS開発について詳しく知る
-              </a>
+              </Link>
             </div>
           </div>
         </div>

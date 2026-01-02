@@ -71,7 +71,7 @@ export default function CompanyPage() {
               </div>
 
               <Link
-                href="/#contact"
+                href="/"
                 className="inline-block text-sm font-medium text-gray-900 hover:text-teal-dark transition-colors link-underline"
               >
                 お問い合わせはこちら

@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackgroundCircles from "@/components/BackgroundCircles";
+import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -91,7 +92,7 @@ export default function AIDevelopmentPage() {
 
           <div className="mt-12 text-center">
             <a
-              href="#contact"
+              href="/"
               className="inline-block bg-teal-dark text-white px-8 py-3 rounded-lg font-medium hover:bg-teal-dark/90 transition-colors"
             >
               お問い合わせはこちら

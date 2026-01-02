@@ -182,13 +182,12 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll Indicator */}
-      <a
-        href="#news"
-        className={`absolute bottom-10 right-8 md:right-12 flex flex-col items-center text-teal-dark transition-all duration-1000 delay-1200 hover:opacity-70 ${
+      <button
+        type="button"
+        className={`absolute bottom-10 right-8 md:right-12 flex flex-col items-center text-teal-dark transition-all duration-1000 delay-1200 hover:opacity-70 bg-transparent border-none cursor-pointer ${
           isVisible ? "opacity-100" : "opacity-0"
         }`}
-        onClick={(e) => {
-          e.preventDefault();
+        onClick={() => {
           const element = document.getElementById('news');
           if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
@@ -199,7 +198,7 @@ export default function HeroSection() {
         <div className="w-px h-12 md:h-16 bg-teal-dark relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-teal-dark/30 animate-pulse" />
         </div>
-      </a>
+      </button>
     </section>
   );
 }

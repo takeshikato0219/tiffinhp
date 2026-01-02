@@ -6,12 +6,12 @@ import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 
 const navItems = [
-  { label: "SERVICE", href: "#service" },
+  { label: "SERVICE", href: "/" },
   { label: "COMPANY", href: "/company" },
   { label: "LAUNCH", href: "/launch" },
   { label: "NEWS", href: "/news" },
   { label: "PATENT", href: "/patents" },
-  { label: "CONTACT", href: "/#contact" },
+  { label: "CONTACT", href: "/" },
 ];
 
 export default function Header() {
@@ -42,41 +42,34 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => {
-              const isHashLink = item.href.startsWith('#') || item.href.includes('#');
-              if (isHashLink) {
-                return (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className="text-sm font-medium text-gray-700 hover:text-teal-dark transition-colors tracking-wider"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const targetId = item.href.replace('#', '').replace('/', '');
-                      const element = document.getElementById(targetId);
-                      if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
-                      } else if (item.href === '/#contact') {
-                        // トップページに移動してからスクロール
-                        window.location.href = '/#contact';
+            {navItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="text-sm font-medium text-gray-700 hover:text-teal-dark transition-colors tracking-wider"
+                prefetch={false}
+                onClick={() => {
+                  // トップページの場合、セクションにスクロール
+                  if (item.href === '/' && typeof window !== 'undefined') {
+                    setTimeout(() => {
+                      if (item.label === 'SERVICE') {
+                        const element = document.getElementById('service');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      } else if (item.label === 'CONTACT') {
+                        const element = document.getElementById('contact');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
                       }
-                    }}
-                  >
-                    {item.label}
-                  </a>
-                );
-              }
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="text-sm font-medium text-gray-700 hover:text-teal-dark transition-colors tracking-wider"
-                  prefetch={false}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
+                    }, 100);
+                  }
+                }}
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -112,43 +105,35 @@ export default function Header() {
         }`}
       >
         <nav className="flex flex-col items-center py-8 space-y-6">
-          {navItems.map((item) => {
-            const isHashLink = item.href.startsWith('#') || item.href.includes('#');
-            if (isHashLink) {
-              return (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="text-lg font-medium text-gray-700 hover:text-teal-dark transition-colors tracking-wider"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsMenuOpen(false);
-                    const targetId = item.href.replace('#', '').replace('/', '');
-                    const element = document.getElementById(targetId);
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    } else if (item.href === '/#contact') {
-                      // トップページに移動してからスクロール
-                      window.location.href = '/#contact';
+          {navItems.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="text-lg font-medium text-gray-700 hover:text-teal-dark transition-colors tracking-wider"
+              onClick={() => {
+                setIsMenuOpen(false);
+                // トップページの場合、セクションにスクロール
+                if (item.href === '/' && typeof window !== 'undefined') {
+                  setTimeout(() => {
+                    if (item.label === 'SERVICE') {
+                      const element = document.getElementById('service');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    } else if (item.label === 'CONTACT') {
+                      const element = document.getElementById('contact');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
                     }
-                  }}
-                >
-                  {item.label}
-                </a>
-              );
-            }
-            return (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="text-lg font-medium text-gray-700 hover:text-teal-dark transition-colors tracking-wider"
-                onClick={() => setIsMenuOpen(false)}
-                prefetch={false}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+                  }, 100);
+                }
+              }}
+              prefetch={false}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
       </div>
     </header>
