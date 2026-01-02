@@ -76,10 +76,9 @@ export default function NewsSection() {
               <div className="relative w-full h-20 bg-gradient-to-br from-teal-dark to-blue-400 overflow-hidden">
                 <div className="w-full h-full flex items-center justify-center">
                   <div className="text-white text-center">
-                    <div className="text-2xl font-bold mb-1">
+                    <div className="text-2xl font-bold">
                       {item.tags && item.tags[0] ? item.tags[0].charAt(0) : 'T'}
                     </div>
-                    <div className="text-xs opacity-90">{item.category}</div>
                   </div>
                 </div>
               </div>
