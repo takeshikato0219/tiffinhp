@@ -11,6 +11,7 @@ const blogPosts = [
     date: "2025.01.15",
     category: "サービスリリース",
     tags: ["TimeWorks", "勤怠管理", "シフト管理"],
+    link: "https://timeworks.jp",
   },
   {
     image: "/images/jBSGouKc.jpg",
@@ -19,6 +20,7 @@ const blogPosts = [
     date: "2025.01.10",
     category: "サービスリリース",
     tags: ["アキヤー", "空き家", "AI"],
+    link: "https://www.akiyer.com/",
   },
   {
     image: "/images/HCaiUayJ.jpg",
@@ -27,6 +29,7 @@ const blogPosts = [
     date: "2025.01.05",
     category: "サービスリリース",
     tags: ["CARSELL", "自動車販売", "営業支援"],
+    link: "https://www.caesell.net/",
   },
 ];
 
@@ -47,8 +50,14 @@ export default function BlogSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {blogPosts.map((post, index) => (
-            <article
+            <Link
               key={index}
+              href={post.link || "#"}
+              target={post.link?.startsWith("http") ? "_blank" : undefined}
+              rel={post.link?.startsWith("http") ? "noopener noreferrer" : undefined}
+              className="block"
+            >
+            <article
               itemScope
               itemType="https://schema.org/NewsArticle"
               className={`group cursor-pointer bg-white rounded-xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-lg tab-hover ${
@@ -96,6 +105,7 @@ export default function BlogSection() {
 
               <div className="mt-4 h-px bg-gray-200 group-hover:bg-teal-dark transition-colors" />
             </article>
+            </Link>
           ))}
         </div>
 
