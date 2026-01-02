@@ -7,7 +7,6 @@ import PatentSection from "@/components/PatentSection";
 import PartnerSection from "@/components/PartnerSection";
 import BlogSection from "@/components/BlogSection";
 import RecruitSection from "@/components/RecruitSection";
-import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import BackgroundCircles from "@/components/BackgroundCircles";
 import ChatWidget from "@/components/ChatWidget";
@@ -155,7 +154,6 @@ export default function Home() {
         <PartnerSection />
         <BlogSection />
         <RecruitSection />
-        <ContactSection />
         <Footer />
         <ChatWidget />
       </main>

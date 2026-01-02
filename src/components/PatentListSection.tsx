@@ -534,16 +534,6 @@ export default function PatentListSection() {
           <Link
             href="/"
             className="inline-block text-sm font-medium text-teal-dark hover:text-teal-dark/80 transition-colors link-underline"
-            onClick={(e) => {
-              e.preventDefault();
-              window.location.href = '/';
-              setTimeout(() => {
-                const element = document.getElementById('contact');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
-              }, 100);
-            }}
           >
             お問い合わせはこちら
           </Link>

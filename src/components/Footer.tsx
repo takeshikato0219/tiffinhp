@@ -9,7 +9,7 @@ const navItems = [
   { label: "LAUNCH", href: "/launch" },
   { label: "NEWS", href: "/news" },
   { label: "PATENT", href: "/patents" },
-  { label: "CONTACT", href: "/" },
+  { label: "CONTACT", href: "/contact" },
 ];
 
 export default function Footer() {
@@ -27,24 +27,6 @@ export default function Footer() {
                 href={item.href}
                 className="text-sm text-gray-600 hover:text-teal-dark transition-colors"
                 prefetch={false}
-                onClick={() => {
-                  // トップページの場合、セクションにスクロール
-                  if (item.href === '/' && typeof window !== 'undefined') {
-                    setTimeout(() => {
-                      if (item.label === 'SERVICE') {
-                        const element = document.getElementById('service');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth' });
-                        }
-                      } else if (item.label === 'CONTACT') {
-                        const element = document.getElementById('contact');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth' });
-                        }
-                      }
-                    }, 100);
-                  }
-                }}
               >
                 {item.label}
               </Link>

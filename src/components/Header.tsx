@@ -11,7 +11,7 @@ const navItems = [
   { label: "LAUNCH", href: "/launch" },
   { label: "NEWS", href: "/news" },
   { label: "PATENT", href: "/patents" },
-  { label: "CONTACT", href: "/" },
+  { label: "CONTACT", href: "/contact" },
 ];
 
 export default function Header() {
@@ -48,24 +48,6 @@ export default function Header() {
                 href={item.href}
                 className="text-sm font-medium text-gray-700 hover:text-teal-dark transition-colors tracking-wider"
                 prefetch={false}
-                onClick={() => {
-                  // トップページの場合、セクションにスクロール
-                  if (item.href === '/' && typeof window !== 'undefined') {
-                    setTimeout(() => {
-                      if (item.label === 'SERVICE') {
-                        const element = document.getElementById('service');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth' });
-                        }
-                      } else if (item.label === 'CONTACT') {
-                        const element = document.getElementById('contact');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth' });
-                        }
-                      }
-                    }, 100);
-                  }
-                }}
               >
                 {item.label}
               </Link>
@@ -110,25 +92,7 @@ export default function Header() {
               key={item.label}
               href={item.href}
               className="text-lg font-medium text-gray-700 hover:text-teal-dark transition-colors tracking-wider"
-              onClick={() => {
-                setIsMenuOpen(false);
-                // トップページの場合、セクションにスクロール
-                if (item.href === '/' && typeof window !== 'undefined') {
-                  setTimeout(() => {
-                    if (item.label === 'SERVICE') {
-                      const element = document.getElementById('service');
-                      if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    } else if (item.label === 'CONTACT') {
-                      const element = document.getElementById('contact');
-                      if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }
-                  }, 100);
-                }
-              }}
+              onClick={() => setIsMenuOpen(false)}
               prefetch={false}
             >
               {item.label}

@@ -73,16 +73,6 @@ export default function CompanyPage() {
               <Link
                 href="/"
                 className="inline-block text-sm font-medium text-gray-900 hover:text-teal-dark transition-colors link-underline"
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.location.href = '/';
-                  setTimeout(() => {
-                    const element = document.getElementById('contact');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }, 100);
-                }}
               >
                 お問い合わせはこちら
               </Link>
