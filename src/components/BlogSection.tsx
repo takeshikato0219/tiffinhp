@@ -30,7 +30,7 @@ const blogPosts = [
     date: "2025.01.05",
     category: "サービスリリース",
     tags: ["CARSELL", "自動車販売", "営業支援"],
-    link: "https://www.caesell.net/",
+    link: "https://carsellapp.com/",
   },
 ];
 

@@ -232,7 +232,7 @@ export default function ServiceSection() {
               </Link>
 
             {/* CARSELL */}
-            <Link href="https://www.caesell.net/" target="_blank" rel="noopener noreferrer" className="block bg-gray-light rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 tab-hover">
+            <Link href="https://carsellapp.com/" target="_blank" rel="noopener noreferrer" className="block bg-gray-light rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 tab-hover">
               <div className="flex items-center gap-2 text-xs text-white bg-teal-muted rounded px-2 py-1 w-fit mb-3">
                 自動車販売AI
             </div>

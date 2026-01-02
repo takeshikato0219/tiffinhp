@@ -41,7 +41,7 @@ const newsItems: NewsItem[] = [
     categoryType: "press",
     title: '自動車販売業界向け営業支援AIシステム「CARSELL」をリリース',
     description: "CARSELLは自動車販売業界に特化した包括的な営業支援システム。顧客管理から見積作成、目標管理まで、営業プロセス全体を一元管理。",
-    link: "https://www.caesell.net/",
+    link: "https://carsellapp.com/",
     image: "/images/HCaiUayJ.jpg",
     tags: ["CARSELL", "自動車販売", "営業支援"],
   },
@@ -73,6 +73,8 @@ export default function NewsSection() {
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
+              <div className="relative w-full h-[48px] bg-gradient-to-br from-teal-dark to-blue-400 overflow-hidden">
+              </div>
               <div className="p-6">
                 <div className="flex items-center gap-4 mb-3">
                   <time className="text-sm text-gray-600">{item.date}</time>
