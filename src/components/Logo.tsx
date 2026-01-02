@@ -15,7 +15,7 @@ export default function Logo({ className, href = "/" }: LogoProps) {
       alt="TIFFIN"
       width={180}
       height={180}
-      className={`${className || ''} w-[140px] md:w-[175px]`}
+      className={`${className || ''} w-[140px] md:w-[180px]`}
       style={{ height: 'auto', marginTop: '0px', marginBottom: '5px' }}
       priority
     />

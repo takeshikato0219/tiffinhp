@@ -49,64 +49,86 @@ export default function BlogSection() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {blogPosts.map((post, index) => (
-            <Link
-              key={index}
-              href={post.link || "#"}
-              target={post.link?.startsWith("http") ? "_blank" : undefined}
-              rel={post.link?.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="block"
-            >
-            <article
-              itemScope
-              itemType="https://schema.org/NewsArticle"
-              className={`group cursor-pointer bg-white rounded-xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-lg tab-hover ${
-                sectionVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-10"
-              }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              <div className="relative overflow-hidden rounded-lg mb-4 bg-gray-light">
-                <img
-                  src={post.image}
-                  alt={`${post.title} - TIFFIN株式会社の${post.category}`}
-                  itemProp="image"
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-
-              <h3 className="text-sm font-medium text-teal-dark leading-relaxed mb-2 group-hover:underline" itemProp="headline">
-                {post.title}
-              </h3>
-
-              <p className="text-xs text-gray-600 mb-3 line-clamp-2" itemProp="description">
-                {post.excerpt}
-              </p>
-
-              <div className="flex items-center gap-3 mb-3">
-                <time dateTime={post.date.replace(/\./g, '-')} itemProp="datePublished" className="text-xs text-gray-500">
-                  {post.date}
-                </time>
-                {post.category && (
-                  <span className="text-xs text-gray-500" itemProp="articleSection">{post.category}</span>
-                )}
-              </div>
-
-              {post.tags && post.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {post.tags.slice(0, 3).map((tag, tagIndex) => (
-                    <span key={tagIndex} className="text-xs text-gray-500">
-                      # {tag}
-                    </span>
-                  ))}
+          {blogPosts.map((post, index) => {
+            const href = post.link || "#";
+            const isHashLink = href === "#" || href.startsWith("#");
+            
+            const articleContent = (
+              <article
+                itemScope
+                itemType="https://schema.org/NewsArticle"
+                className={`group cursor-pointer bg-white rounded-xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-lg tab-hover ${
+                  sectionVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-10"
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <div className="relative overflow-hidden rounded-lg mb-4 bg-gray-light">
+                  <img
+                    src={post.image}
+                    alt={`${post.title} - TIFFIN株式会社の${post.category}`}
+                    itemProp="image"
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
-              )}
 
-              <div className="mt-4 h-px bg-gray-200 group-hover:bg-teal-dark transition-colors" />
-            </article>
-            </Link>
-          ))}
+                <h3 className="text-sm font-medium text-teal-dark leading-relaxed mb-2 group-hover:underline" itemProp="headline">
+                  {post.title}
+                </h3>
+
+                <p className="text-xs text-gray-600 mb-3 line-clamp-2" itemProp="description">
+                  {post.excerpt}
+                </p>
+
+                <div className="flex items-center gap-3 mb-3">
+                  <time dateTime={post.date.replace(/\./g, '-')} itemProp="datePublished" className="text-xs text-gray-500">
+                    {post.date}
+                  </time>
+                  {post.category && (
+                    <span className="text-xs text-gray-500" itemProp="articleSection">{post.category}</span>
+                  )}
+                </div>
+
+                {post.tags && post.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {post.tags.slice(0, 3).map((tag, tagIndex) => (
+                      <span key={tagIndex} className="text-xs text-gray-500">
+                        # {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                <div className="mt-4 h-px bg-gray-200 group-hover:bg-teal-dark transition-colors" />
+              </article>
+            );
+            
+            if (isHashLink) {
+              return (
+                <a
+                  key={index}
+                  href={href}
+                  className="block"
+                >
+                  {articleContent}
+                </a>
+              );
+            }
+            
+            return (
+              <Link
+                key={index}
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="block"
+                prefetch={false}
+              >
+                {articleContent}
+              </Link>
+            );
+          })}
         </div>
 
         <div className="mt-12 text-right">

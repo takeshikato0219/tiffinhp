@@ -94,10 +94,10 @@ export default function HeroSection() {
 
         {/* Dark Teal Circle */}
         <div
-          className={`absolute w-[320px] h-[320px] md:w-[500px] md:h-[500px] bg-teal-dark rounded-full transition-all duration-1000 delay-700 animate-float-morph-rotate ${
+          className={`absolute w-[107px] h-[107px] md:w-[250px] md:h-[250px] bg-teal-dark rounded-full transition-all duration-1000 delay-700 animate-float-morph-rotate ${
             isVisible ? "opacity-100 scale-100" : "opacity-0 scale-90"
           }`}
-          style={{ top: "30%", right: "5%" }}
+          style={{ top: "calc(30% + 500px)", right: "5%" }}
         />
 
         {/* Additional Small Circles for Empty Spaces */}
@@ -187,6 +187,13 @@ export default function HeroSection() {
         className={`absolute bottom-10 right-8 md:right-12 flex flex-col items-center text-teal-dark transition-all duration-1000 delay-1200 hover:opacity-70 ${
           isVisible ? "opacity-100" : "opacity-0"
         }`}
+        onClick={(e) => {
+          e.preventDefault();
+          const element = document.getElementById('news');
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
       >
         <span className="text-xs tracking-widest mb-3 [writing-mode:vertical-rl]">SCROLL</span>
         <div className="w-px h-12 md:h-16 bg-teal-dark relative overflow-hidden">

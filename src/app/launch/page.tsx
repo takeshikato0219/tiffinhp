@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
@@ -25,7 +24,7 @@ const newsItems: NewsItem[] = [
     title: '勤怠管理・シフト管理プラットフォーム「TimeWorks」をリリース',
     description: "TimeWorksは、勤怠管理・シフト管理・作業時間の追跡をひとつのプラットフォームで実現。チームの生産性を最大化します。",
     link: "#",
-    image: "/images/timeworks.jpg",
+    image: "/images/CN5ktcFf.jpg",
     tags: ["TimeWorks", "勤怠管理", "シフト管理"],
   },
   {
@@ -35,7 +34,7 @@ const newsItems: NewsItem[] = [
     title: 'AI空き家探索サービス「アキヤー」をリリース',
     description: "アキヤーはAIで空き家・空き地候補を抽出する不動産探索サービスです。AI判定により空き家の確率を％で表示し、エリア別フィルタで効率よく検索可能。",
     link: "https://www.akiyer.com/",
-    image: "/images/akiyer.jpg",
+    image: "/images/jBSGouKc.jpg",
     tags: ["アキヤー", "空き家", "AI"],
   },
   {
@@ -45,7 +44,7 @@ const newsItems: NewsItem[] = [
     title: '自動車販売業界向け営業支援AIシステム「CARSELL」をリリース',
     description: "CARSELLは自動車販売業界に特化した包括的な営業支援システム。顧客管理から見積作成、目標管理まで、営業プロセス全体を一元管理。",
     link: "https://www.caesell.net/",
-    image: "/images/carsell.jpg",
+    image: "/images/HCaiUayJ.jpg",
     tags: ["CARSELL", "自動車販売", "営業支援"],
   },
 ];
@@ -78,29 +77,15 @@ export default function LaunchPage() {
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className="relative w-full h-[38.4px] bg-gradient-to-br from-teal-dark to-teal-light overflow-hidden">
-                  {item.image ? (
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                      onError={(e) => {
-                        // 画像読み込みエラー時のフォールバック
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                      }}
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <div className="text-white text-center">
-                        <div className="text-4xl font-bold mb-2">
-                          {item.tags && item.tags[0] ? item.tags[0].charAt(0) : 'T'}
-                        </div>
-                        <div className="text-xs opacity-80">{item.category}</div>
+                <div className="relative w-full h-20 bg-gradient-to-br from-teal-dark to-blue-400 overflow-hidden">
+                  <div className="w-full h-full flex items-center justify-center">
+                    <div className="text-white text-center">
+                      <div className="text-2xl font-bold mb-1">
+                        {item.tags && item.tags[0] ? item.tags[0].charAt(0) : 'T'}
                       </div>
+                      <div className="text-xs opacity-90">{item.category}</div>
                     </div>
-                  )}
+                  </div>
                 </div>
                 <div className="p-6">
                   <div className="flex items-center gap-4 mb-3">

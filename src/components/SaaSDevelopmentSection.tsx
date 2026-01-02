@@ -27,15 +27,22 @@ export default function SaaSDevelopmentSection() {
                 協業型SaaS開発に関するお問い合わせはこちら
               </p>
             </div>
-            <Link
+            <a
               href="#contact"
               className="flex items-center gap-1.5 text-xs md:text-sm font-medium text-gray-900 hover:text-teal-dark transition-colors whitespace-nowrap"
+              onClick={(e) => {
+                e.preventDefault();
+                const element = document.getElementById('contact');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
             >
               READ MORE
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
-            </Link>
+            </a>
           </div>
         </div>
 
@@ -146,12 +153,19 @@ export default function SaaSDevelopmentSection() {
 
             {/* CTA */}
             <div className="text-center">
-              <Link
+              <a
                 href="#contact"
                 className="inline-block bg-teal-dark text-white px-8 py-3 rounded-lg font-medium hover:bg-teal-dark/90 transition-all duration-300 hover:scale-105"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.getElementById('contact');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
               >
                 協業型SaaS開発について詳しく知る
-              </Link>
+              </a>
             </div>
           </div>
         </div>

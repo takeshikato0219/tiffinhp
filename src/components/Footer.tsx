@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Logo from "./Logo";
 
@@ -19,50 +21,78 @@ export default function Footer() {
           <Logo />
 
           <nav className="flex flex-wrap justify-center gap-6">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="text-sm text-gray-600 hover:text-teal-dark transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const isHashLink = item.href.startsWith('#') || item.href.includes('#');
+              if (isHashLink) {
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="text-sm text-gray-600 hover:text-teal-dark transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const targetId = item.href.replace('#', '').replace('/', '');
+                      const element = document.getElementById(targetId);
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      } else if (item.href === '/#contact') {
+                        // トップページに移動してからスクロール
+                        window.location.href = '/#contact';
+                      }
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                );
+              }
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="text-sm text-gray-600 hover:text-teal-dark transition-colors"
+                  prefetch={false}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
         </div>
 
         {/* Sub Footer */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-gray-300">
           <div className="flex flex-wrap items-center justify-center gap-6">
-            <Link
+            <a
               href="#"
               className="text-xs text-gray-500 hover:text-teal-dark transition-colors"
+              onClick={(e) => e.preventDefault()}
             >
               PRIVACY POLICY
-            </Link>
-            <Link
+            </a>
+            <a
               href="#"
               className="text-xs text-gray-500 hover:text-teal-dark transition-colors"
+              onClick={(e) => e.preventDefault()}
             >
               INFORMATION SECURITY POLICY
-            </Link>
+            </a>
 
             {/* Social Links */}
             <div className="flex items-center gap-4">
-              <Link href="#" className="hover:opacity-70 transition-opacity">
+              <a href="#" className="hover:opacity-70 transition-opacity" onClick={(e) => e.preventDefault()}>
                 <img
                   src="https://ext.same-assets.com/1175703844/1045283732.png"
                   alt="X (Twitter)"
                   className="w-5 h-auto"
                 />
-              </Link>
-              <Link href="#" className="hover:opacity-70 transition-opacity">
+              </a>
+              <a href="#" className="hover:opacity-70 transition-opacity" onClick={(e) => e.preventDefault()}>
                 <img
                   src="https://ext.same-assets.com/1175703844/1008988818.png"
                   alt="Facebook"
                   className="w-5 h-5"
                 />
-              </Link>
+              </a>
             </div>
           </div>
 
