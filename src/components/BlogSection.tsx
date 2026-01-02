@@ -83,15 +83,8 @@ export default function BlogSection() {
                   <span className="text-xs text-gray-500" itemProp="articleSection">{post.category}</span>
                 )}
               </div>
-                <time className="text-xs text-gray-500">{post.date}</time>
-                {post.category && (
-                  <span className="text-xs px-2 py-0.5 border border-gray-300 rounded">
-                    {post.category}
-                  </span>
-                )}
-              </div>
 
-              {post.tags.length > 0 && (
+              {post.tags && post.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2">
                   {post.tags.slice(0, 3).map((tag, tagIndex) => (
                     <span key={tagIndex} className="text-xs text-gray-500">

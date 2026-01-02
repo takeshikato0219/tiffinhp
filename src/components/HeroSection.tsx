@@ -159,7 +159,7 @@ export default function HeroSection() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight min-h-[140px] md:min-h-[180px] flex flex-col justify-center" itemProp="headline">
+          <h1 className="font-bold text-gray-900 leading-tight min-h-[140px] md:min-h-[180px] flex flex-col justify-center text-[45px] md:text-[65px]" itemProp="headline">
             <span className="block">
               {displayedText1}
               {isTyping && displayedText2 === "" && (

@@ -34,7 +34,7 @@ export default function Header() {
             <span 
               key={dotKey}
               className="text-teal-dark font-bold animate-dot-bounce" 
-              style={{ marginLeft: '-12px', marginTop: '3px', fontSize: 'calc(2rem + 7px)', lineHeight: '1', display: 'inline-block' }}
+              style={{ marginLeft: '4px', marginTop: '1px', fontSize: 'calc(2rem + 7px)', lineHeight: '1', display: 'inline-block' }}
             >
               .
             </span>

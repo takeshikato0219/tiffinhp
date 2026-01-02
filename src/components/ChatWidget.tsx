@@ -154,7 +154,7 @@ export default function ChatWidget() {
       {/* チャットボタン */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-4 md:bottom-6 left-4 md:left-6 z-50 bg-teal-dark text-white w-[61px] h-[61px] shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group rounded-full ${
+        className={`fixed bottom-4 md:bottom-6 left-[21px] md:left-[29px] z-50 bg-teal-dark text-white w-[71px] h-[71px] shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group rounded-full ${
           isOpen ? "" : "animate-chat-float-morph-rotate"
         }`}
         aria-label="チャットを開く"
