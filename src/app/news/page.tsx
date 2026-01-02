@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Breadcrumb from "@/components/Breadcrumb";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 interface NewsItem {
@@ -67,6 +68,7 @@ export default function NewsPage() {
       <Header />
       <section className="pt-32 pb-20 bg-white relative z-10 flex-grow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Breadcrumb items={[{ label: "NEWS", href: "/news" }]} />
           <h2
             ref={sectionRef}
             className={`text-2xl font-bold text-gray-900 tracking-wider mb-12 transition-all duration-700 ${
@@ -88,11 +90,14 @@ export default function NewsPage() {
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 {item.image && (
-                  <div className="relative overflow-hidden rounded-lg mb-4 bg-gray-light">
-                    <img
+                  <div className="relative overflow-hidden rounded-lg mb-4 bg-gray-light h-48">
+                    <Image
                       src={item.image}
-                      alt={item.title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      alt={`${item.title} - TIFFIN株式会社`}
+                      width={400}
+                      height={192}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
                     />
                   </div>
                 )}

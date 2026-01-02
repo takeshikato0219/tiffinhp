@@ -270,6 +270,9 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
+        {/* モバイル最適化 */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+        <meta name="format-detection" content="telephone=no" />
         {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-RTK4L38SC0"></script>
         <script

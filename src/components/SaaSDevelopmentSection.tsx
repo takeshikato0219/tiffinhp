@@ -51,13 +51,8 @@ export default function SaaSDevelopmentSection() {
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 通常6,000万円規模のソフトウェア開発を約1/3まで圧縮
               </h3>
-              <p className="text-sm text-gray-700 leading-relaxed mb-4">
-                通常<strong>6,000万円規模</strong>と言われるソフトウェア開発を、
-                <strong>販売前提のSaaSとして設計</strong>することで、<strong>初期開発費を約1/3まで圧縮</strong>できます。
-              </p>
               <p className="text-sm text-gray-700 leading-relaxed">
-                自社専用ではなく、<strong>市場に販売できるプロダクトとして共同開発</strong>し、
-                開発後は<strong>パートナーとして共に販売・成長させていくモデル</strong>です。
+                販売前提のSaaSとして設計することで、初期開発費を約1/3まで圧縮。市場に販売できるプロダクトとして共同開発し、パートナーとして共に販売・成長させていくモデルです。
               </p>
             </div>
 
@@ -70,7 +65,6 @@ export default function SaaSDevelopmentSection() {
                 </h4>
                 <p className="text-sm text-gray-700 leading-relaxed">
                   通常6,000万円規模の開発を約1/3（約2,000万円）まで圧縮。
-                  販売前提のSaaS設計により、初期コストを大幅に削減できます。
                 </p>
               </div>
 
@@ -80,8 +74,7 @@ export default function SaaSDevelopmentSection() {
                   パートナーシップ
                 </h4>
                 <p className="text-sm text-gray-700 leading-relaxed">
-                  開発後はパートナーとして共に販売・成長。
-                  単なる開発委託ではなく、長期的なパートナーシップを構築します。
+                  開発後はパートナーとして共に販売・成長。長期的なパートナーシップを構築します。
                 </p>
               </div>
 
@@ -91,8 +84,7 @@ export default function SaaSDevelopmentSection() {
                   市場販売可能なプロダクト
                 </h4>
                 <p className="text-sm text-gray-700 leading-relaxed">
-                  自社専用ではなく、市場に販売できるSaaSとして設計。
-                  複数の企業で利用できる汎用的なソリューションを開発します。
+                  市場に販売できるSaaSとして設計。複数の企業で利用できる汎用的なソリューションを開発します。
                 </p>
               </div>
 
@@ -102,8 +94,7 @@ export default function SaaSDevelopmentSection() {
                   特許申請も可能
                 </h4>
                 <p className="text-sm text-gray-700 leading-relaxed">
-                  協業型SaaS開発と同時に<strong>特許の申請も可能</strong>です。
-                  多数のパテントを同時に申請するサービスも対応可能です。
+                  協業型SaaS開発と同時に特許の申請も可能。多数のパテントを同時に申請するサービスも対応可能です。
                 </p>
               </div>
             </div>

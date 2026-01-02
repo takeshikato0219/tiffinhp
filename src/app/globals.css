@@ -22,10 +22,21 @@
   body {
     @apply bg-white text-foreground;
     font-family: 'Noto Sans JP', 'Overpass', sans-serif;
+    /* モバイルでのタッチ操作を最適化 */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Overpass', 'Noto Sans JP', sans-serif;
+  }
+
+  /* モバイルでのテキスト選択を最適化 */
+  @media (max-width: 768px) {
+    body {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
   }
 }
 

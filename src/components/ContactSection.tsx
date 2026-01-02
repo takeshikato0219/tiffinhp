@@ -80,14 +80,16 @@ export default function ContactSection() {
             message = errorText;
             // CORSエラーの場合、より分かりやすいメッセージに変換
             if (errorText.includes('not in your whitelist') || errorText.includes('whitelist')) {
-              message = "CORSエラー: EmailJSダッシュボードの「Allowed Origins」に「http://localhost:5555」を追加してください。\n\n設定手順:\n1. https://dashboard.emailjs.com/admin/integration にアクセス\n2. 「Allowed Origins」セクションを開く\n3. 「http://localhost:5555」を追加\n4. 「Save」をクリック";
+              const currentOrigin = typeof window !== 'undefined' ? window.location.origin : '';
+              message = `CORSエラー: EmailJSダッシュボードの「Allowed Origins」に現在のドメインを追加してください。\n\n設定手順:\n1. https://dashboard.emailjs.com/admin/integration にアクセス\n2. 「Allowed Origins」セクションを開く\n3. 以下のURLを追加:\n   - ローカル開発: http://localhost:5555\n   - 本番環境: https://www.tiffin.one\n4. 「Save」をクリック\n\n現在のドメイン: ${currentOrigin}`;
             }
           }
         } else if ('message' in error && typeof error.message === 'string') {
           message = error.message;
         } else if ('status' in error && typeof error.status === 'number') {
           if (error.status === 0) {
-            message = "ネットワークエラーが発生しました。EmailJSダッシュボードの「Allowed Origins」に「http://localhost:5555」が追加されているか確認してください。";
+            const currentOrigin = typeof window !== 'undefined' ? window.location.origin : '';
+            message = `ネットワークエラーが発生しました。EmailJSダッシュボードの「Allowed Origins」に「${currentOrigin || 'http://localhost:5555 または https://www.tiffin.one'}」が追加されているか確認してください。`;
           } else if (error.status >= 400 && error.status < 500) {
             message = "リクエストエラーが発生しました。EmailJSの設定（サービスID、テンプレートID）を確認してください。";
           } else if (error.status >= 500) {

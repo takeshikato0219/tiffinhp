@@ -17,6 +17,7 @@ export default function ConsultingPatentPage() {
       <Header />
       <section className="py-20 bg-white relative z-10">
         <div className="max-w-7xl xl:max-w-[1400px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+          <Breadcrumb items={[{ label: "サービス", href: "/services" }, { label: "コンサル・特許", href: "/services/consulting-patent" }]} />
           <div className="text-center mb-12">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
               専門サービス：コンサル・特許

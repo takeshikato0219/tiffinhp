@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const blogPosts = [
@@ -64,12 +65,15 @@ export default function BlogSection() {
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className="relative overflow-hidden rounded-lg mb-4 bg-gray-light">
-                  <img
+                <div className="relative overflow-hidden rounded-lg mb-4 bg-gray-light h-48">
+                  <Image
                     src={post.image}
                     alt={`${post.title} - TIFFIN株式会社の${post.category}`}
                     itemProp="image"
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    width={400}
+                    height={192}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
                   />
                 </div>
 

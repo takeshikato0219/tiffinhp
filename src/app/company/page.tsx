@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Breadcrumb from "@/components/Breadcrumb";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export default function CompanyPage() {
@@ -21,6 +22,7 @@ export default function CompanyPage() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <Breadcrumb items={[{ label: "会社情報", href: "/company" }]} />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div
               ref={leftRef}

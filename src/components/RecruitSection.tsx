@@ -27,7 +27,7 @@ export default function RecruitSection() {
           </div>
 
           <Link
-            href="#"
+            href="/contact"
             className="inline-block text-sm font-medium text-white hover:text-yellow transition-colors link-underline"
           >
             READ MORE

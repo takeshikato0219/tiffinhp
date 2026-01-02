@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Breadcrumb from "@/components/Breadcrumb";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 interface NewsItem {
@@ -57,6 +58,7 @@ export default function LaunchPage() {
       <Header />
       <section className="pt-32 pb-20 bg-white relative z-10 flex-grow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Breadcrumb items={[{ label: "LAUNCH", href: "/launch" }]} />
           <h2
             ref={sectionRef}
             className={`text-2xl font-bold text-gray-900 tracking-wider mb-12 transition-all duration-700 ${

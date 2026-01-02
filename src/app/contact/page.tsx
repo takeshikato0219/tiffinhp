@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Breadcrumb from "@/components/Breadcrumb";
 import ContactSection from "@/components/ContactSection";
 import { Metadata } from "next";
 
@@ -28,6 +29,9 @@ export default function ContactPage() {
     <main className="min-h-screen flex flex-col relative bg-white">
       <Header />
       <section className="pt-32 pb-20 bg-white relative z-10 flex-grow">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+          <Breadcrumb items={[{ label: "お問い合わせ", href: "/contact" }]} />
+        </div>
         <ContactSection />
       </section>
       <Footer />

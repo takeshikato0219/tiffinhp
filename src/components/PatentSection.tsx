@@ -48,10 +48,7 @@ export default function PatentSection() {
           >
             <h3 className="text-xl font-bold text-gray-900 mb-4">多数の特許を保有</h3>
             <p className="text-sm text-gray-700 leading-relaxed mb-4">
-              TIFFIN株式会社は、AI開発・AIウェブ開発・AIアプリケーション開発に関する
-              <strong>多数の特許を保有</strong>しています。音声AI・画像AI・チャットAIなどの
-              AI技術に関する豊富な特許ポートフォリオを有しており、
-              これらの特許技術を活かしたソリューションを提供しています。
+              AI開発・AIウェブ開発・AIアプリケーション開発に関する多数の特許を保有。音声AI・画像AI・チャットAIなどのAI技術に関する豊富な特許ポートフォリオを有しています。
             </p>
             <ul className="text-sm text-gray-700 space-y-2">
               <li className="flex items-start">
@@ -81,10 +78,7 @@ export default function PatentSection() {
           >
             <h3 className="text-xl font-bold text-gray-900 mb-4">特許ライセンス業・パテント申請サービス</h3>
             <p className="text-sm text-gray-700 leading-relaxed mb-4">
-              TIFFIN株式会社は、<strong>特許ライセンス業</strong>も展開しています。
-              保有する特許技術のライセンス提供により、お客様のビジネスを支援します。
-              また、<strong>多数のパテントを同時に申請するサービス</strong>も提供しており、
-              お客様の特許戦略をサポートします。
+              特許ライセンス業も展開。保有する特許技術のライセンス提供により、お客様のビジネスを支援します。多数のパテントを同時に申請するサービスも提供しており、お客様の特許戦略をサポートします。
             </p>
             <ul className="text-sm text-gray-700 space-y-2">
               <li className="flex items-start">

@@ -16,7 +16,7 @@ export default function PartnerSection() {
           }`}
         >
           <Link
-            href="#"
+            href="/contact"
             className="block bg-yellow rounded-lg p-8 hover:bg-yellow-light hover:scale-105 hover:shadow-xl transition-all duration-300 group tab-hover"
           >
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">

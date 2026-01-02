@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import Logo from "./Logo";
 
 const navItems = [
@@ -55,17 +56,23 @@ export default function Footer() {
             {/* Social Links */}
             <div className="flex items-center gap-4">
               <a href="#" className="hover:opacity-70 transition-opacity" onClick={(e) => e.preventDefault()}>
-                <img
+                <Image
                   src="https://ext.same-assets.com/1175703844/1045283732.png"
                   alt="X (Twitter)"
+                  width={20}
+                  height={20}
                   className="w-5 h-auto"
+                  loading="lazy"
                 />
               </a>
               <a href="#" className="hover:opacity-70 transition-opacity" onClick={(e) => e.preventDefault()}>
-                <img
+                <Image
                   src="https://ext.same-assets.com/1175703844/1008988818.png"
                   alt="Facebook"
+                  width={20}
+                  height={20}
                   className="w-5 h-5"
+                  loading="lazy"
                 />
               </a>
             </div>

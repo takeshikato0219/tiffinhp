@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import NewsSection from "@/components/NewsSection";
 import ServiceSection from "@/components/ServiceSection";
 import SaaSDevelopmentSection from "@/components/SaaSDevelopmentSection";
 import PatentSection from "@/components/PatentSection";
@@ -147,12 +146,11 @@ export default function Home() {
         <BackgroundCircles />
         <Header />
         <HeroSection />
-        <NewsSection />
         <ServiceSection />
         <SaaSDevelopmentSection />
         <PatentSection />
-        <PartnerSection />
         <BlogSection />
+        <PartnerSection />
         <RecruitSection />
         <Footer />
         <ChatWidget />
