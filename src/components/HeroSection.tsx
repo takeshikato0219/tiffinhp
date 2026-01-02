@@ -69,7 +69,7 @@ export default function HeroSection() {
   const currentMessage = messages[currentMessageIndex];
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-visible bg-white pt-20">
+    <section className="relative min-h-[100vh] md:min-h-screen flex items-center overflow-visible bg-white pt-20 pb-8 md:pb-0">
       {/* Geometric Shapes */}
       <div className="absolute inset-0 overflow-visible pointer-events-none">
         {/* Yellow Circle - Top Right */}
@@ -153,17 +153,15 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8 md:py-0">
         <div
           className={`transition-all duration-1000 delay-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
           <h1 
-            className={`font-bold text-gray-900 leading-tight min-h-[140px] md:min-h-[180px] flex flex-col justify-center ${
-              currentMessageIndex === 4 
-                ? 'text-[35px] md:text-[55px]' 
-                : 'text-[45px] md:text-[65px]'
+            className={`font-bold text-gray-900 leading-tight min-h-[80px] md:min-h-[180px] flex flex-col justify-center text-[50px] ${
+              currentMessageIndex === 2 ? 'mt-[15px]' : ''
             }`} 
             itemProp="headline"
           >

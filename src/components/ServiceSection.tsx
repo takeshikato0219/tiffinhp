@@ -8,7 +8,6 @@ export default function ServiceSection() {
   const { ref: card1Ref, isVisible: card1Visible } = useScrollAnimation();
   const { ref: card2Ref, isVisible: card2Visible } = useScrollAnimation();
   const { ref: card3Ref, isVisible: card3Visible } = useScrollAnimation();
-  const { ref: itSystemRef, isVisible: itSystemVisible } = useScrollAnimation();
   const { ref: edgeImageRef, isVisible: edgeImageVisible } = useScrollAnimation();
 
   return (
@@ -30,11 +29,7 @@ export default function ServiceSection() {
             音声AI・画像AI・チャットAI・エッジ処理・画像処理の開発・サポートからコンサルティングまで
           </h2>
           <p className="text-sm text-gray-600 max-w-4xl mx-auto leading-relaxed">
-            TIFFIN株式会社は、<strong>AI開発・AIウェブ開発・AIアプリケーション開発</strong>を専門とする企業です。
-            <strong>ITシステム開発にAIを組み込んだ開発</strong>を軸に、お客様のビジネスに最適なソリューションを提供します。
-            <strong>音声AI・画像AI・チャットAIの開発・サポート</strong>、<strong>YOLOを用いた画像処理・物体検出</strong>、<strong>防犯カメラシステム開発</strong>、<strong>エッジ処理・画像処理</strong>から、<strong>AIコンサルティング</strong>、<strong>プロデュース</strong>まで一貫して対応可能です。
-            また、<strong>協業型SaaS開発モデル</strong>により、開発費を抑えた共同開発も可能です。
-            <strong>多数の特許を保有</strong>しており、<strong>特許ライセンス業</strong>も展開。<strong>多数のパテントを同時に申請するサービス</strong>も提供しています。
+            <strong>AI開発・AIウェブ開発・AIアプリケーション開発</strong>を専門とし、<strong>ITシステム開発にAIを組み込んだ開発</strong>を軸に、お客様のビジネスに最適なソリューションを提供します。
           </p>
         </div>
 
@@ -170,42 +165,6 @@ export default function ServiceSection() {
               </div>
             </div>
             </Link>
-          </div>
-        </div>
-
-        {/* IT System Development with AI Section */}
-        <div
-          ref={itSystemRef}
-          className={`bg-gradient-to-br from-gray-light to-gray-50 rounded-2xl p-6 md:p-8 lg:p-10 mb-12 transition-all duration-700 hover:shadow-xl hover:-translate-y-1 ${
-            itSystemVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-6 md:mb-8 text-center">
-            ITシステム開発とAIを組み合わせた開発
-          </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-            <div className="bg-white rounded-xl p-5 md:p-6 shadow-md hover:shadow-lg transition-shadow">
-              <h3 className="text-base md:text-lg font-bold text-gray-900 mb-3 md:mb-4 flex items-center gap-2">
-                <span className="w-1 h-6 bg-teal-dark rounded"></span>
-                既存システムへのAI統合
-              </h3>
-              <p className="text-xs md:text-sm text-gray-700 leading-relaxed">
-                お客様の既存のITシステムにAI機能を組み込む開発を得意としています。
-                音声AI・画像AI・チャットAI、エッジ処理・画像処理などのAI技術を既存システムに統合し、
-                業務効率化と生産性向上を実現します。
-              </p>
-            </div>
-            <div className="bg-white rounded-xl p-5 md:p-6 shadow-md hover:shadow-lg transition-shadow">
-              <h3 className="text-base md:text-lg font-bold text-gray-900 mb-3 md:mb-4 flex items-center gap-2">
-                <span className="w-1 h-6 bg-teal-dark rounded"></span>
-                AIを中核とした新規システム開発
-              </h3>
-              <p className="text-xs md:text-sm text-gray-700 leading-relaxed">
-                AIを中核とした新規ITシステムの開発を手がけています。
-                AI開発・AIウェブ開発・AIアプリケーション開発の専門知識を活かし、
-                革新的なITシステムを構築します。
-              </p>
-            </div>
           </div>
         </div>
 
