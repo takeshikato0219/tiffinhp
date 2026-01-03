@@ -101,7 +101,7 @@ export default function ChatWidget() {
   
   // ドラッグ&ドロップ用の状態
   const [isMobile, setIsMobile] = useState(false);
-  const [position, setPosition] = useState({ x: 26, y: 76 }); // モバイルの初期位置: left 26px, bottom 76px
+  const [position, setPosition] = useState({ x: 26, y: 126 }); // モバイルの初期位置: left 26px, bottom 126px (50px上げる)
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const hasMovedRef = useRef(false); // ドラッグが実際に発生したかどうか
@@ -272,7 +272,7 @@ export default function ChatWidget() {
       if (deltaX > moveThreshold || deltaY > moveThreshold) {
         e.preventDefault();
         hasMovedRef.current = true;
-        const buttonHeight = 71; // ボタンの高さ
+        const buttonHeight = 61; // ボタンの高さ（10px小さく）
         const newX = touch.clientX - dragStart.x;
         const newTop = touch.clientY - dragStart.y;
         const newBottom = window.innerHeight - newTop - buttonHeight;
@@ -292,7 +292,13 @@ export default function ChatWidget() {
     const handleTouchEnd = (e: TouchEvent) => {
       const wasDragging = hasMovedRef.current;
       setIsDragging(false);
-      // ドラッグが発生していない場合はクリックとして扱う（onClickで処理されるため、ここでは処理しない）
+      // ドラッグが発生していない場合はクリックとして扱う
+      if (!wasDragging) {
+        // クリックイベントを発火させる
+        setTimeout(() => {
+          setIsOpen((prev) => !prev);
+        }, 100);
+      }
       hasMovedRef.current = false;
       touchStartRef.current = { x: 0, y: 0 };
     };
@@ -318,12 +324,11 @@ export default function ChatWidget() {
             e.stopPropagation();
             return;
           }
-          // PCでは常にクリック、モバイルではドラッグ中でない場合のみクリック
+          // PCでは常にクリック
           if (!isMobile) {
             setIsOpen((prev) => !prev);
-          } else if (!isDragging) {
-            setIsOpen((prev) => !prev);
           }
+          // モバイルではhandleTouchEndで処理されるため、ここでは処理しない
         }}
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
@@ -332,20 +337,20 @@ export default function ChatWidget() {
           bottom: isMobile ? `${position.y}px` : undefined,
           left: isMobile ? `${position.x}px` : undefined,
           cursor: isMobile ? (isDragging ? 'grabbing' : 'grab') : 'pointer',
-          touchAction: isMobile ? 'none' : 'auto',
+          touchAction: isMobile ? 'manipulation' : 'auto',
           transition: isDragging ? 'none' : undefined,
         }}
-        className={`md:bottom-[156px] md:left-[34px] z-[9999] bg-teal-dark text-white w-[71px] h-[71px] shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group rounded-full ${
+        className={`md:bottom-[156px] md:left-[34px] z-[9999] bg-teal-dark text-white w-[61px] h-[61px] md:w-[71px] md:h-[71px] shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group rounded-full ${
           isOpen || isDragging ? "" : "animate-chat-float-morph-rotate"
         } ${isDragging ? 'scale-110' : ''}`}
         aria-label="チャットを開く"
       >
         {isOpen ? (
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         ) : (
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
           </svg>
         )}
