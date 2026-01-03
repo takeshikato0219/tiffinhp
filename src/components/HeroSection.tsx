@@ -189,7 +189,7 @@ export default function HeroSection() {
       {/* Scroll Indicator */}
       <button
         type="button"
-        className={`absolute bottom-6 sm:bottom-8 md:bottom-10 right-4 sm:right-6 md:right-8 lg:right-12 flex flex-col items-center text-teal-dark transition-all duration-1000 delay-1200 hover:opacity-70 bg-transparent border-none cursor-pointer ${
+        className={`absolute bottom-[9px] sm:bottom-[11px] md:bottom-[13px] right-4 sm:right-6 md:right-8 lg:right-12 flex flex-col items-center text-teal-dark transition-all duration-1000 delay-1200 hover:opacity-70 bg-transparent border-none cursor-pointer ${
           isVisible ? "opacity-100" : "opacity-0"
         }`}
         onClick={() => {

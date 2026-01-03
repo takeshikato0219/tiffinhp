@@ -151,6 +151,12 @@ export default function ServiceSection() {
                   AIプロジェクトの企画から開発、運用まで一貫してプロデュースします。
                 </p>
               </div>
+              <div className="space-y-2 md:space-y-3 group/item">
+                <h3 className="text-base md:text-lg font-bold text-gray-900 group-hover/item:text-yellow transition-colors">RPA作成</h3>
+                <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
+                  業務プロセスの自動化を実現するRPA（Robotic Process Automation）の開発・構築を提供します。繰り返し作業の自動化により、業務効率を大幅に向上させます。
+                </p>
+              </div>
               <div className="space-y-2 md:space-y-3 group/item border-t border-gray-200 pt-4">
                 <h3 className="text-base md:text-lg font-bold text-gray-900 group-hover/item:text-yellow transition-colors">特許ライセンス業</h3>
                 <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
