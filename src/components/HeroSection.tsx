@@ -69,101 +69,106 @@ export default function HeroSection() {
   const currentMessage = messages[currentMessageIndex];
 
   return (
-    <section className="relative min-h-[100vh] md:min-h-screen flex items-center overflow-visible bg-white pt-20 pb-8 md:pb-0">
+    <section className="relative min-h-[80vh] md:min-h-[85vh] flex items-center overflow-x-hidden bg-white pt-20 pb-8 md:pb-12">
       {/* Geometric Shapes */}
-      <div className="absolute inset-0 overflow-visible pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Yellow Circle - Top Right */}
         <div
-          className={`absolute w-[450px] h-[450px] md:w-[700px] md:h-[700px] bg-yellow rounded-full transition-all duration-1000 delay-300 animate-float ${
+          className={`absolute w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[500px] md:h-[500px] lg:w-[700px] lg:h-[700px] bg-yellow rounded-full transition-all duration-1000 delay-300 animate-float ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}
-          style={{ top: "-20%", right: "-15%" }}
+          style={{ top: "-15%", right: "-10%", maxWidth: "100vw" }}
         />
 
         {/* Light Blue Circle */}
         <div
-          className={`absolute w-[400px] h-[400px] md:w-[650px] md:h-[650px] rounded-full transition-all duration-1000 delay-500 animate-morph ${
+          className={`absolute w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] md:w-[450px] md:h-[450px] lg:w-[650px] lg:h-[650px] rounded-full transition-all duration-1000 delay-500 animate-morph ${
             isVisible ? "opacity-100 scale-100" : "opacity-0 scale-90"
           }`}
           style={{
             top: "20%",
-            right: "10%",
+            right: "5%",
             backgroundColor: "#a7c8d4",
+            maxWidth: "100vw",
           }}
         />
 
         {/* Dark Teal Circle */}
         <div
-          className={`absolute w-[107px] h-[107px] md:w-[250px] md:h-[250px] bg-teal-dark rounded-full transition-all duration-1000 delay-700 animate-float-morph-rotate ${
+          className={`absolute w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[180px] md:h-[180px] lg:w-[250px] lg:h-[250px] bg-teal-dark rounded-full transition-all duration-1000 delay-700 animate-float-morph-rotate ${
             isVisible ? "opacity-100 scale-100" : "opacity-0 scale-90"
           }`}
-          style={{ top: "calc(30% + 500px)", right: "5%" }}
+          style={{ top: "calc(30% + 300px)", right: "3%", maxWidth: "100vw" }}
         />
 
         {/* Additional Small Circles for Empty Spaces */}
         {/* Top Left Small Circle */}
         <div
-          className={`absolute w-[120px] h-[120px] md:w-[180px] md:h-[180px] bg-yellow/30 rounded-full transition-all duration-1000 delay-900 animate-float ${
+          className={`absolute w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[140px] md:h-[140px] lg:w-[180px] lg:h-[180px] bg-yellow/30 rounded-full transition-all duration-1000 delay-900 animate-float ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}
-          style={{ top: "10%", left: "5%" }}
+          style={{ top: "10%", left: "3%", maxWidth: "100vw" }}
         />
 
         {/* Middle Left Circle */}
         <div
-          className={`absolute w-[150px] h-[150px] md:w-[220px] md:h-[220px] rounded-full transition-all duration-1000 delay-1100 animate-morph ${
+          className={`absolute w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] md:w-[160px] md:h-[160px] lg:w-[220px] lg:h-[220px] rounded-full transition-all duration-1000 delay-1100 animate-morph ${
             isVisible ? "opacity-100 scale-100" : "opacity-0 scale-90"
           }`}
           style={{
             top: "50%",
-            left: "8%",
+            left: "3%",
             backgroundColor: "#a7c8d4",
             opacity: 0.4,
+            maxWidth: "100vw",
           }}
         />
 
         {/* Bottom Right Small Circle */}
         <div
-          className={`absolute w-[100px] h-[100px] md:w-[150px] md:h-[150px] bg-teal-dark/40 rounded-full transition-all duration-1000 delay-1300 animate-float-morph-rotate ${
+          className={`absolute w-[70px] h-[70px] sm:w-[80px] sm:h-[80px] md:w-[120px] md:h-[120px] lg:w-[150px] lg:h-[150px] bg-teal-dark/40 rounded-full transition-all duration-1000 delay-1300 animate-float-morph-rotate ${
             isVisible ? "opacity-100 scale-100" : "opacity-0 scale-90"
           }`}
-          style={{ bottom: "15%", right: "20%" }}
+          style={{ bottom: "15%", right: "10%", maxWidth: "100vw" }}
         />
 
         {/* Bottom Left Circle */}
         <div
-          className={`absolute w-[130px] h-[130px] md:w-[200px] md:h-[200px] bg-yellow/25 rounded-full transition-all duration-1000 delay-1500 animate-float ${
+          className={`absolute w-[90px] h-[90px] sm:w-[110px] sm:h-[110px] md:w-[150px] md:h-[150px] lg:w-[200px] lg:h-[200px] bg-yellow/25 rounded-full transition-all duration-1000 delay-1500 animate-float ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}
-          style={{ bottom: "20%", left: "10%" }}
+          style={{ bottom: "20%", left: "5%", maxWidth: "100vw" }}
         />
 
         {/* Center Small Circle */}
         <div
-          className={`absolute w-[80px] h-[80px] md:w-[120px] md:h-[120px] rounded-full transition-all duration-1000 delay-1700 animate-morph ${
+          className={`absolute w-[60px] h-[60px] sm:w-[70px] sm:h-[70px] md:w-[90px] md:h-[90px] lg:w-[120px] lg:h-[120px] rounded-full transition-all duration-1000 delay-1700 animate-morph ${
             isVisible ? "opacity-100 scale-100" : "opacity-0 scale-90"
           }`}
           style={{
             top: "60%",
             left: "50%",
+            transform: "translateX(-50%)",
             backgroundColor: "#64b9d0",
             opacity: 0.3,
+            maxWidth: "100vw",
           }}
         />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8 md:py-0">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8 md:py-0 overflow-x-hidden">
         <div
           className={`transition-all duration-1000 delay-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
           <h1 
-            className={`font-bold text-gray-900 leading-tight min-h-[80px] md:min-h-[180px] flex flex-col justify-center text-[38px] md:text-[50px] ${
-              currentMessageIndex === 2 ? 'mt-[15px]' : ''
+            className={`font-bold text-gray-900 leading-tight min-h-[60px] sm:min-h-[80px] md:min-h-[140px] lg:min-h-[180px] flex flex-col justify-center text-[28px] sm:text-[32px] md:text-[42px] lg:text-[50px] px-2 sm:px-0 ${
+              currentMessageIndex === 2 ? 'mt-[10px] sm:mt-[15px]' : ''
             }`} 
             itemProp="headline"
+            style={{ wordBreak: "keep-all", overflowWrap: "break-word" }}
           >
             <span className="block">
               {displayedText1}
@@ -184,7 +189,7 @@ export default function HeroSection() {
       {/* Scroll Indicator */}
       <button
         type="button"
-        className={`absolute bottom-10 right-8 md:right-12 flex flex-col items-center text-teal-dark transition-all duration-1000 delay-1200 hover:opacity-70 bg-transparent border-none cursor-pointer ${
+        className={`absolute bottom-6 sm:bottom-8 md:bottom-10 right-4 sm:right-6 md:right-8 lg:right-12 flex flex-col items-center text-teal-dark transition-all duration-1000 delay-1200 hover:opacity-70 bg-transparent border-none cursor-pointer ${
           isVisible ? "opacity-100" : "opacity-0"
         }`}
         onClick={() => {

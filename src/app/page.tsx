@@ -36,7 +36,7 @@ export const metadata = {
   openGraph: {
     title: "AI開発・特許ライセンス | TIFFIN株式会社 | 新潟AI開発の専門企業",
     description: "新潟県三条市に本社を構えるAI開発・AIウェブ開発・AIアプリケーション開発の専門企業。音声AI・画像AI・チャットAIの開発・サポート、YOLO画像処理、防犯カメラシステム開発、エッジ処理、AIコンサルティング、特許ライセンス業を提供。",
-    url: "https://ai-shift.com",
+    url: "https://www.tiffin.one",
     siteName: "TIFFIN株式会社",
     locale: "ja_JP",
     type: "website",
@@ -52,7 +52,7 @@ export default function Home() {
         "@type": "ListItem",
         position: 1,
         name: "ホーム",
-        item: "https://ai-shift.com",
+        item: "https://www.tiffin.one",
       },
     ],
   };
@@ -143,7 +143,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd, null, 0) }}
       />
-      <main className="min-h-screen relative">
+      <main className="min-h-screen relative overflow-x-hidden">
         <BackgroundCircles />
         <Header />
         <HeroSection />

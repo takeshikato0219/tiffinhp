@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 
 const navItems = [
-  { label: "SERVICE", href: "/" },
+  { label: "SERVICE", href: "/services" },
   { label: "COMPANY", href: "/company" },
   { label: "LAUNCH", href: "/launch" },
   { label: "NEWS", href: "/news" },
@@ -29,7 +29,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center" style={{ paddingTop: '15px', paddingBottom: '5px' }}>
+          <div className="flex items-center lg:pt-[15px] lg:pb-[5px] pt-[11px] pb-[1px]">
             <Logo />
             <span 
               key={dotKey}

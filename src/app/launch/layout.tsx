@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "LAUNCH | TIFFIN株式会社 - サービスリリース情報",
     description: "TIFFIN株式会社のサービスリリース情報。TimeWorks、アキヤー、CARSELLなど、AI開発・AIウェブ開発・AIアプリケーション開発の最新サービスをご紹介します。",
-    url: "https://ai-shift.com/launch",
+    url: "https://www.tiffin.one/launch",
     type: "website",
     locale: "ja_JP",
     images: [
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     description: "AI開発・AIウェブ開発・AIアプリケーション開発の最新サービスリリース情報。",
   },
   alternates: {
-    canonical: "https://ai-shift.com/launch",
+    canonical: "https://www.tiffin.one/launch",
   },
 };
 

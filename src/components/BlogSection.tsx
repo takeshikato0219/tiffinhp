@@ -140,7 +140,7 @@ export default function BlogSection() {
             href="/news"
             className="inline-block text-sm font-medium text-gray-900 hover:text-teal-dark transition-colors link-underline"
           >
-            READ MORE
+            ブログ記事一覧を見る
           </Link>
         </div>
       </div>

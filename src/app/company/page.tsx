@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -40,34 +41,105 @@ export default function CompanyPage() {
                 ITシステム開発とAIを融合したソリューションを提供します。
               </h3>
 
+              {/* Company Image */}
+              <div className="relative w-full h-64 md:h-80 mb-8 rounded-xl overflow-hidden bg-gradient-to-br from-teal-dark to-teal-light">
+                <Image
+                  src="/images/CN5ktcFf.jpg"
+                  alt="TIFFIN株式会社 - AI開発の専門企業"
+                  fill
+                  className="object-cover opacity-80"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-teal-dark/60 to-transparent flex items-center justify-center">
+                  <div className="text-white text-center px-4">
+                    <p className="text-xl md:text-2xl font-bold mb-2">TIFFIN株式会社</p>
+                    <p className="text-sm md:text-base">AI開発・AIウェブ開発・AIアプリケーション開発の専門企業</p>
+                  </div>
+                </div>
+              </div>
+
               <div className="space-y-8 mb-8">
                 <div>
                   <h4 className="text-lg font-bold text-gray-900 mb-3">多数の特許を保有・特許ライセンス業</h4>
-                  <p className="text-sm text-gray-700 leading-relaxed">
+                  <p className="text-sm text-gray-700 leading-relaxed mb-4">
                     TIFFIN株式会社は、AI技術に関する<strong>多数の特許を保有</strong>しており、
                     <strong>特許ライセンス業</strong>も展開しています。<strong>多数のパテントを同時に申請するサービス</strong>も提供可能です。
                     AI開発・AIウェブ開発・AIアプリケーション開発における独自のAI技術とノウハウを活かし、
                     お客様のビジネスを支援します。新潟県三条市に本社を構え、全国のお客様にサービスを提供しています。
                   </p>
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    現在、有効特許26件、審査中4件、実用新案3件の特許を保有しており、
+                    AI画像認識、防犯カメラシステム、SNS監視システム、音声処理、自動通信システムなど、
+                    幅広い分野で特許技術を有しています。これらの特許技術を活用したライセンス提供により、
+                    お客様のビジネス成長を支援します。
+                  </p>
                 </div>
 
                 <div>
                   <h4 className="text-lg font-bold text-gray-900 mb-3">包括的なAI開発サービス</h4>
-                  <p className="text-sm text-gray-700 leading-relaxed">
+                  <p className="text-sm text-gray-700 leading-relaxed mb-4">
                     <strong>AI開発・AIウェブ開発・AIアプリケーション開発</strong>を専門とし、
                     <strong>音声AI・画像AI・チャットAIの開発・サポート</strong>、<strong>エッジ処理・画像処理</strong>から、
                     <strong>AIコンサルティング</strong>、<strong>プロデュース</strong>まで一貫して対応可能です。
                     <strong>ITシステム開発にAIを組み込んだ開発</strong>を軸に、お客様のニーズに合わせた最適なソリューションを提供します。
                     AI開発において豊富な実績があり、AI系のアプリケーション開発、エッジ処理、画像処理も多数手がけています。
                   </p>
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    具体的には、YOLOを用いたリアルタイム物体検出システム、防犯カメラシステムによる人物の繰り返し出現検知システム、
+                    音声合成（TTS）サービス、SNS監視AIシステムなど、多様なAIソリューションを開発・提供しています。
+                    また、エッジコンピューティング環境でのAI処理にも対応し、低遅延・高精度なAIシステムの実現を可能にしています。
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-bold text-gray-900 mb-3">協業型SaaS開発モデル</h4>
+                  <p className="text-sm text-gray-700 leading-relaxed mb-4">
+                    TIFFIN株式会社は、<strong>協業型SaaS開発モデル</strong>を提供しています。
+                    通常6,000万円規模のソフトウェア開発を約1/3まで圧縮し、販売前提のSaaSとして設計することで、
+                    初期開発費を大幅に削減できます。開発後はパートナーとして共に販売・成長させていくモデルで、
+                    長期的なパートナーシップを構築します。
+                  </p>
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    このモデルにより、市場に販売できるSaaSとして設計され、複数の企業で利用できる汎用的なソリューションを開発します。
+                    協業型SaaS開発と同時に特許の申請も可能で、多数のパテントを同時に申請するサービスも対応可能です。
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-bold text-gray-900 mb-3">AI Workerシリーズの開発実績</h4>
+                  <p className="text-sm text-gray-700 leading-relaxed mb-4">
+                    TIFFIN株式会社は、領域に特化したAIプロダクト「AI Workerシリーズ」を提供しています。
+                    <strong>TimeWorks</strong>（勤怠管理・シフト管理）、<strong>アキヤー</strong>（AI空き家探索）、
+                    <strong>CARSELL</strong>（自動車販売業界向け営業支援AI）、<strong>BuzzShield</strong>（SNS監視AI）、
+                    <strong>akari voice</strong>（音声合成サービス）など、様々な業界・領域に特化したAIプロダクトを開発・リリースしています。
+                  </p>
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    これらのプロダクトは、実際のビジネス課題を解決するために開発され、多くの企業で活用されています。
+                    新潟県三条市を拠点としながらも、全国のお客様にサービスを提供し、AI技術を活用した地域社会への貢献も行っています。
+                  </p>
                 </div>
 
                 <div>
                   <h4 className="text-lg font-bold text-gray-900 mb-3">本社所在地：新潟県三条市</h4>
-                  <p className="text-sm text-gray-700 leading-relaxed">
+                  <p className="text-sm text-gray-700 leading-relaxed mb-4">
                     TIFFIN株式会社の本社は<strong>新潟県三条市石上１丁目10番33号</strong>にあります。
                     新潟県三条市を拠点に、全国のお客様にAI開発・AIウェブ開発・AIアプリケーション開発のサービスを提供しています。
-                    お気軽にお問い合わせください。
+                    三条駅より車で約10分のアクセスしやすい立地にあり、お客様のご来社もお待ちしております。
+                  </p>
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    新潟県三条市は、ものづくりの街として知られており、TIFFIN株式会社もその伝統を受け継ぎながら、
+                    AI技術という新しい技術で地域の産業発展に貢献しています。三条市を中心とした新潟県内の企業様への
+                    AI導入支援も積極的に行っており、地域密着型のAI開発企業として活動しています。
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-bold text-gray-900 mb-3">今後の展望</h4>
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    TIFFIN株式会社は、グローバルAIカンパニーを目指し、人とAIの協働を目指す企業として成長を続けています。
+                    AI技術の進化に合わせて、常に最新の技術をキャッチアップし、お客様に最適なAIソリューションを提供していきます。
+                    また、新潟県三条市を拠点としながらも、全国・世界のお客様にサービスを提供し、
+                    AI技術を活用した社会課題の解決に取り組んでいきます。
                   </p>
                 </div>
               </div>

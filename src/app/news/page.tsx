@@ -43,12 +43,12 @@ const newsItems: NewsItem[] = [
     tags: ["CARSELL", "自動車販売", "営業支援"],
   },
   {
-    title: 'AIで野良猫を識別し被害を防ぐ 三条市のTIFFINが野良猫識別システム「AIVIS」を開発・導入',
-    excerpt: "TIFFIN株式会社は、AIの画像認識技術を活用した野良猫識別システム「AIVIS」を開発し、三条市に導入しました。4K高精度カメラを使用し、約95%の精度で野良猫を識別。24時間365日監視可能で、AIが野良猫の姿や行動パターンを学習し、同じ野良猫が繰り返し識別された場合に通知するシステムです。地域の野良猫被害を防ぐためのAI技術を活用したソリューションとして注目されています。",
+    title: 'AIでクマを検知し被害を防ぐ 三条市のTIFFINがクマ検知システム「AIVIS」を開発・導入',
+    excerpt: "TIFFIN株式会社は、AIの画像認識技術を活用したクマ検知システム「AIVIS」を開発し、三条市に導入しました。4K高精度カメラを使用し、約95%の精度でクマを検知。24時間365日監視可能で、AIがクマの姿や行動パターンを学習し、同じクマが繰り返し検知された場合に通知するシステムです。地域のクマ被害を防ぐためのAI技術を活用したソリューションとして注目されています。",
     date: "2025.11.11",
     category: "ニュース",
-    tags: ["AIVIS", "AI", "画像認識", "三条市", "野良猫識別"],
-    link: "https://www.kenoh.com/2025/11/11_tiffin.html",
+    tags: ["AIVIS", "AI", "画像認識", "三条市", "クマ検知"],
+    link: "/news/aivis-bear-detection-system",
   },
   {
     title: '新潟県三条市のTIFFIN株式会社、AI技術で地域社会に貢献',
@@ -68,15 +68,15 @@ export default function NewsPage() {
       <Header />
       <section className="pt-32 pb-20 bg-white relative z-10 flex-grow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Breadcrumb items={[{ label: "NEWS", href: "/news" }]} />
-          <h2
+          <Breadcrumb items={[{ label: "ブログ", href: "/news" }]} />
+          <h1
             ref={sectionRef}
             className={`text-2xl font-bold text-gray-900 tracking-wider mb-12 transition-all duration-700 ${
               sectionVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            NEWS<span className="inline-block w-2 h-2 bg-yellow rounded-full ml-1" />
-          </h2>
+            ブログ<span className="inline-block w-2 h-2 bg-yellow rounded-full ml-1" />
+          </h1>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {newsItems.map((item, index) => (
@@ -102,31 +102,27 @@ export default function NewsPage() {
                   </div>
                 )}
                 {!item.image && (
-                  <div className="relative overflow-hidden rounded-lg mb-4 bg-gradient-to-br from-teal-dark to-teal-light h-48 flex items-center justify-center">
+                  <div className="relative overflow-hidden rounded-lg mb-4 bg-gradient-to-br from-blue-400 to-teal-light h-48 flex items-center justify-center">
                     <div className="text-white text-center">
-                      <div className="text-4xl font-bold mb-2">
-                        {item.tags && item.tags[0] ? item.tags[0].charAt(0) : 'N'}
-                      </div>
                       <div className="text-xs opacity-80">{item.category}</div>
                     </div>
                   </div>
                 )}
 
                 <div className="p-6">
-                  <h3 className="text-sm font-medium text-teal-dark leading-relaxed mb-2 group-hover:underline">
-                    {item.link ? (
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        {item.title}
-                      </a>
-                    ) : (
-                      item.title
-                    )}
-                  </h3>
+                  {item.link ? (
+                    <Link
+                      href={item.link}
+                      className="text-sm font-medium text-teal-dark leading-relaxed mb-2 group-hover:underline block"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {item.title}
+                    </Link>
+                  ) : (
+                    <h3 className="text-sm font-medium text-teal-dark leading-relaxed mb-2 group-hover:underline">
+                      {item.title}
+                    </h3>
+                  )}
 
                   <p className="text-xs text-gray-600 mb-3 line-clamp-3">
                     {item.excerpt}
@@ -162,7 +158,7 @@ export default function NewsPage() {
               href="/"
               className="inline-block text-sm font-medium text-gray-900 hover:text-teal-dark transition-colors link-underline"
             >
-              READ MORE
+              TIFFIN株式会社のトップページへ
             </Link>
           </div>
         </div>

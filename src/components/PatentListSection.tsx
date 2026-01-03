@@ -528,12 +528,12 @@ export default function PatentListSection() {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-sm text-gray-600 mb-4">
+          <p className="text-base md:text-lg text-gray-700 mb-6 font-medium">
             特許に関するお問い合わせは、お問い合わせフォームよりご連絡ください。
           </p>
           <Link
-            href="/"
-            className="inline-block text-sm font-medium text-teal-dark hover:text-teal-dark/80 transition-colors link-underline"
+            href="/contact"
+            className="inline-block text-base md:text-lg font-medium text-teal-dark hover:text-teal-dark/80 transition-colors link-underline px-6 py-2"
           >
             お問い合わせはこちら
           </Link>

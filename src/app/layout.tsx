@@ -3,7 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ai-shift.com'),
+  metadataBase: new URL('https://www.tiffin.one'),
   title: {
     default: "AI開発・特許ライセンス | TIFFIN株式会社 | AIシステム開発・エッジ処理・画像処理",
     template: "%s | TIFFIN株式会社"
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "AI開発・特許ライセンス | TIFFIN株式会社",
     description: "AI開発・AIウェブ開発・AIアプリケーション開発の専門企業。音声AI・画像AI・チャットAIの開発・サポート、エッジ処理・画像処理、ITシステム開発、AIコンサルティングを提供。新潟県三条市に本社を構え、多数の特許を保有。",
-    url: "https://ai-shift.com",
+    url: "https://www.tiffin.one",
     siteName: "TIFFIN株式会社",
     locale: "ja_JP",
     type: "website",
@@ -98,7 +98,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://ai-shift.com",
+    canonical: "https://www.tiffin.one",
   },
   verification: {
     // Google Search Console用の検証コードを追加可能
@@ -115,8 +115,8 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": ["Organization", "LocalBusiness"],
     name: "TIFFIN株式会社",
-    url: "https://ai-shift.com",
-    logo: "https://ai-shift.com/logo.png",
+    url: "https://www.tiffin.one",
+    logo: "https://www.tiffin.one/logo.png",
     description: "AI開発・AIウェブ開発・AIアプリケーション開発の専門企業。新潟県三条市に本社を構え、多数の特許を保有。",
     address: {
       "@type": "PostalAddress",
@@ -216,14 +216,14 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "TIFFIN株式会社",
-    url: "https://ai-shift.com",
+    url: "https://www.tiffin.one",
     description: "AI開発・AIウェブ開発・AIアプリケーション開発の専門企業",
     inLanguage: "ja-JP",
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: "https://ai-shift.com/search?q={search_term_string}",
+        urlTemplate: "https://www.tiffin.one/search?q={search_term_string}",
       },
       "query-input": "required name=search_term_string",
     },

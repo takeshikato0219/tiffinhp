@@ -44,6 +44,33 @@ const newsItems: NewsItem[] = [
     link: "https://carsellapp.com/",
     tags: ["CARSELL", "自動車販売", "営業支援"],
   },
+  {
+    date: "2025.01.01",
+    category: "サービスリリース",
+    categoryType: "press",
+    title: 'SNS監視AI「BuzzShield」をリリース',
+    description: "BuzzShieldは著名人や政治家向けのSNS炎上リスク監視システム。AIでSNS投稿やコメント、動画の拡散傾向を24時間365日モニタリングし、誹謗中傷や切り抜きによる印象操作を発見。",
+    link: "https://bussshield.net/",
+    tags: ["BuzzShield", "SNS監視", "AI"],
+  },
+  {
+    date: "2025.01.31",
+    category: "ローンチ予定",
+    categoryType: "news",
+    title: '音声合成サービス「akari voice」1月末ローンチ予定',
+    description: "akari voiceは高品質な音声合成（TTS）サービス。自然な音声でテキストを音声に変換します。コールセンターや音声アシスタントなど、様々な用途に対応可能。",
+    link: "#",
+    tags: ["akari voice", "TTS", "音声合成"],
+  },
+  {
+    date: "2025.02.01",
+    category: "ローンチ予定",
+    categoryType: "news",
+    title: '音声対話タブレット端末「ポスピーク」開発中',
+    description: "ポスピークは音声で会話する形のタブレット端末。AIを活用した自然な音声対話を実現し、様々なシーンでのコミュニケーションを支援します。",
+    link: "#",
+    tags: ["ポスピーク", "タブレット", "音声対話"],
+  },
 ];
 
 export default function LaunchPage() {
@@ -127,14 +154,6 @@ export default function LaunchPage() {
             ))}
           </div>
 
-          <div className="mt-12 text-right">
-            <Link
-              href="/"
-              className="inline-block text-sm font-medium text-gray-900 hover:text-teal-dark transition-colors link-underline"
-            >
-              READ MORE
-            </Link>
-          </div>
         </div>
       </section>
       <Footer />

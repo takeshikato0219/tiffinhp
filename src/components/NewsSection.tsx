@@ -116,7 +116,7 @@ export default function NewsSection() {
                     className="text-xs text-teal-dark hover:text-teal-dark/80 transition-colors inline-flex items-center gap-1 font-medium"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    詳細を見る
+                    {item.title.includes('TimeWorks') ? 'TimeWorksの詳細を見る' : item.title.includes('アキヤー') ? 'アキヤーの詳細を見る' : item.title.includes('CARSELL') ? 'CARSELLの詳細を見る' : '詳細を見る'}
                     <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
@@ -132,7 +132,7 @@ export default function NewsSection() {
             href="/launch"
             className="inline-block text-sm font-medium text-gray-900 hover:text-teal-dark transition-colors link-underline"
           >
-            READ MORE
+            サービスリリース一覧を見る
           </Link>
         </div>
       </div>

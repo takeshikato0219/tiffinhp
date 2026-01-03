@@ -1,30 +1,32 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "NEWS | TIFFIN株式会社 - AI開発・サービスリリース情報",
-  description: "TIFFIN株式会社の最新ニュース・サービスリリース情報。TimeWorks、アキヤー、CARSELL、AIVIS（野良猫識別システム）など、AI開発・AIウェブ開発・AIアプリケーション開発の最新情報をお届けします。新潟県三条市のAI開発企業として、地域社会に貢献する取り組みもご紹介します。",
+  title: "ブログ | TIFFIN株式会社 - AI開発・サービスリリース情報",
+  description: "TIFFIN株式会社のブログ。AI開発・AIウェブ開発・AIアプリケーション開発に関する最新情報、サービスリリース情報、技術記事をお届けします。TimeWorks、アキヤー、CARSELL、AIVIS（クマ検知システム）など、新潟県三条市のAI開発企業としての取り組みをご紹介。",
   keywords: [
     "TIFFIN株式会社",
-    "NEWS",
-    "ニュース",
+    "ブログ",
+    "AI開発ブログ",
+    "AI技術ブログ",
     "サービスリリース",
     "TimeWorks",
     "アキヤー",
     "CARSELL",
     "AIVIS",
+    "クマ検知システム",
+    "AI画像認識",
     "AI開発",
     "AIウェブ開発",
     "新潟AI",
     "三条市",
-    "野良猫識別システム",
-    "AI画像認識",
     "新潟県三条市",
     "AIニュース",
+    "AI技術記事",
   ],
   openGraph: {
-    title: "NEWS | TIFFIN株式会社 - AI開発・サービスリリース情報",
-    description: "TIFFIN株式会社の最新ニュース・サービスリリース情報。AI開発・AIウェブ開発・AIアプリケーション開発の最新情報をお届けします。新潟県三条市のAI開発企業として、地域社会に貢献する取り組みもご紹介。",
-    url: "https://ai-shift.com/news",
+    title: "ブログ | TIFFIN株式会社 - AI開発・サービスリリース情報",
+    description: "TIFFIN株式会社のブログ。AI開発・AIウェブ開発・AIアプリケーション開発に関する最新情報、サービスリリース情報、技術記事をお届けします。",
+    url: "https://www.tiffin.one/news",
     type: "website",
     locale: "ja_JP",
     images: [
@@ -32,17 +34,17 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "TIFFIN株式会社 - 最新ニュース",
+        alt: "TIFFIN株式会社 - AI開発ブログ",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "NEWS | TIFFIN株式会社",
-    description: "AI開発・AIウェブ開発・AIアプリケーション開発の最新ニュース・サービスリリース情報。",
+    title: "ブログ | TIFFIN株式会社",
+    description: "AI開発・AIウェブ開発・AIアプリケーション開発に関する最新情報、サービスリリース情報、技術記事。",
   },
   alternates: {
-    canonical: "https://ai-shift.com/news",
+    canonical: "https://www.tiffin.one/news",
   },
 };
 

@@ -19,9 +19,9 @@ export default function ServiceSection() {
             headingVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6" style={{ fontSize: 'clamp(1.5rem, 4vw, calc(1.5rem + 5px))' }}>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6" style={{ fontSize: 'clamp(1.5rem, 4vw, calc(1.5rem + 5px))' }}>
             AI開発・AIウェブ開発の専門企業として実績多数
-          </h1>
+          </h2>
           <p className="text-sm text-gray-600 max-w-4xl mx-auto leading-relaxed">
             ITシステム開発とAIを融合したソリューションを提供します。
           </p>

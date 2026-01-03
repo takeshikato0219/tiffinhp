@@ -5,7 +5,7 @@ import Image from "next/image";
 import Logo from "./Logo";
 
 const navItems = [
-  { label: "SERVICE", href: "/" },
+  { label: "SERVICE", href: "/services" },
   { label: "COMPANY", href: "/company" },
   { label: "LAUNCH", href: "/launch" },
   { label: "NEWS", href: "/news" },
@@ -19,7 +19,15 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
-          <Logo />
+          <div className="flex items-center">
+            <Logo />
+            <span 
+              className="text-teal-dark font-bold animate-pulse" 
+              style={{ marginLeft: '4px', marginTop: '1px', fontSize: 'calc(2rem + 7px)', lineHeight: '1', display: 'inline-block' }}
+            >
+              .
+            </span>
+          </div>
 
           <nav className="flex flex-wrap justify-center gap-6">
             {navItems.map((item) => (

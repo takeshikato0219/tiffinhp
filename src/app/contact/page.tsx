@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "お問い合わせ | TIFFIN株式会社 | AI開発の専門企業",
     description: "AI開発・AIウェブ開発・AIアプリケーション開発に関するお問い合わせはこちらから。",
-    url: "https://tiffin.one/contact",
+    url: "https://www.tiffin.one/contact",
     siteName: "TIFFIN株式会社",
     locale: "ja_JP",
     type: "website",

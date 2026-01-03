@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://ai-shift.com'
+  const baseUrl = 'https://www.tiffin.one'
   
   return [
     {
@@ -35,6 +35,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/services`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/services/ai-development`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
@@ -55,6 +61,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/contact`,
       lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/news/aivis-bear-detection-system`,
+      lastModified: new Date('2025-11-11'),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
