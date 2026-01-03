@@ -313,19 +313,19 @@ export default function ChatWidget() {
           className="md:bottom-[324px] md:left-6 md:right-auto z-50 w-[calc(100vw-2rem)] md:w-96 max-w-md md:h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200"
         >
           {/* ヘッダー */}
-          <div className="bg-teal-dark text-white p-4 rounded-t-2xl flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                <span className="text-lg font-bold">T</span>
+          <div className="bg-teal-dark text-white p-3 sm:p-4 rounded-t-2xl flex items-center justify-between">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-base sm:text-lg font-bold">T</span>
               </div>
-              <div>
-                <h3 className="font-bold">TIFFIN Q&A</h3>
+              <div className="min-w-0">
+                <h3 className="font-bold text-sm sm:text-base">TIFFIN Q&A</h3>
                 <p className="text-xs text-white/80">通常すぐに応答します</p>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-white hover:text-gray-200 transition-colors"
+              className="text-white hover:text-gray-200 transition-colors flex-shrink-0 ml-2"
               aria-label="閉じる"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -335,20 +335,20 @@ export default function ChatWidget() {
           </div>
 
           {/* メッセージエリア */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+          <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 bg-gray-50">
             {messages.map((message) => (
               <div
                 key={message.id}
                 className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[80%] rounded-2xl px-4 py-2 ${
+                  className={`max-w-[85%] sm:max-w-[80%] rounded-2xl px-3 py-2 sm:px-4 ${
                     message.sender === "user"
                       ? "bg-teal-dark text-white"
                       : "bg-white text-gray-900 border border-gray-200"
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap">{message.text}</p>
+                  <p className="text-sm whitespace-pre-wrap break-words">{message.text}</p>
                 </div>
               </div>
             ))}
@@ -356,8 +356,8 @@ export default function ChatWidget() {
           </div>
 
           {/* 入力エリア */}
-          <div className="p-4 border-t border-gray-200 bg-white rounded-b-2xl">
-            <div className="flex gap-2">
+          <div className="p-3 sm:p-4 border-t border-gray-200 bg-white rounded-b-2xl">
+            <div className="flex gap-2 items-center">
               <input
                 ref={inputRef}
                 type="text"
@@ -365,14 +365,15 @@ export default function ChatWidget() {
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="メッセージを入力..."
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-dark focus:border-transparent"
+                className="flex-1 px-3 py-2 sm:px-4 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-dark focus:border-transparent"
               />
               <button
                 onClick={handleSend}
                 disabled={!inputValue.trim()}
-                className="bg-teal-dark text-white px-4 py-2 rounded-lg hover:bg-teal-dark/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="bg-teal-dark text-white px-3 py-2 sm:px-4 rounded-lg hover:bg-teal-dark/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex-shrink-0"
+                aria-label="送信"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                 </svg>
               </button>
