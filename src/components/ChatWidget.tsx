@@ -309,7 +309,7 @@ export default function ChatWidget() {
           touchAction: isMobile ? 'none' : 'auto',
           transition: isDragging ? 'none' : undefined,
         }}
-        className={`md:bottom-[306px] md:left-[34px] z-50 bg-teal-dark text-white w-[71px] h-[71px] shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group rounded-full ${
+        className={`md:bottom-[156px] md:left-[34px] z-50 bg-teal-dark text-white w-[71px] h-[71px] shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group rounded-full ${
           isOpen || isDragging ? "" : "animate-chat-float-morph-rotate"
         } ${isDragging ? 'scale-110' : ''}`}
         aria-label="チャットを開く"
@@ -336,7 +336,7 @@ export default function ChatWidget() {
             maxHeight: isMobile ? `calc(100vh - ${position.y + 40}px)` : undefined,
             height: isMobile ? undefined : '600px',
           }}
-          className="md:bottom-[324px] md:left-6 md:right-auto md:w-96 max-w-md md:h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200"
+          className="md:bottom-[174px] md:left-6 md:right-auto md:w-96 max-w-md md:h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200"
         >
           {/* ヘッダー */}
           <div className="bg-teal-dark text-white p-3 sm:p-4 rounded-t-2xl flex items-center justify-between">
