@@ -104,6 +104,7 @@ export default function ChatWidget() {
   const [position, setPosition] = useState({ x: 26, y: 56 }); // モバイルの初期位置: left 26px, bottom 56px (124-180=-56だが、実際には56px)
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const hasMovedRef = useRef(false); // ドラッグが実際に発生したかどうか
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   // モバイル判定
@@ -169,7 +170,7 @@ export default function ChatWidget() {
   // ドラッグ開始
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!isMobile) return; // PCではドラッグ無効
-    e.preventDefault();
+    hasMovedRef.current = false;
     setIsDragging(true);
     const rect = buttonRef.current?.getBoundingClientRect();
     if (rect) {
@@ -185,6 +186,8 @@ export default function ChatWidget() {
     if (!isDragging || !isMobile) return;
 
     const handleMouseMove = (e: MouseEvent) => {
+      e.preventDefault();
+      hasMovedRef.current = true;
       const buttonHeight = 71; // ボタンの高さ
       const newX = e.clientX - dragStart.x;
       const newTop = e.clientY - dragStart.y;
@@ -202,7 +205,15 @@ export default function ChatWidget() {
     };
 
     const handleMouseUp = () => {
+      const wasDragging = hasMovedRef.current;
       setIsDragging(false);
+      // ドラッグが発生していない場合はクリックとして扱う
+      if (!wasDragging) {
+        setTimeout(() => {
+          setIsOpen((prev) => !prev);
+        }, 0);
+      }
+      hasMovedRef.current = false;
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -217,6 +228,7 @@ export default function ChatWidget() {
   // タッチイベント対応（モバイル）
   const handleTouchStart = (e: React.TouchEvent) => {
     if (!isMobile) return; // PCではドラッグ無効
+    hasMovedRef.current = false;
     const touch = e.touches[0];
     setIsDragging(true);
     const rect = buttonRef.current?.getBoundingClientRect();
@@ -233,6 +245,7 @@ export default function ChatWidget() {
 
     const handleTouchMove = (e: TouchEvent) => {
       e.preventDefault();
+      hasMovedRef.current = true;
       const touch = e.touches[0];
       const buttonHeight = 71; // ボタンの高さ
       const newX = touch.clientX - dragStart.x;
@@ -251,7 +264,15 @@ export default function ChatWidget() {
     };
 
     const handleTouchEnd = () => {
+      const wasDragging = hasMovedRef.current;
       setIsDragging(false);
+      // ドラッグが発生していない場合はクリックとして扱う
+      if (!wasDragging) {
+        setTimeout(() => {
+          setIsOpen((prev) => !prev);
+        }, 0);
+      }
+      hasMovedRef.current = false;
     };
 
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
@@ -268,9 +289,14 @@ export default function ChatWidget() {
       {/* チャットボタン */}
       <button
         ref={buttonRef}
-        onClick={() => {
-          if (!isDragging) {
-            setIsOpen(!isOpen);
+        onClick={(e) => {
+          // モバイルでドラッグが発生した場合はクリックを無視
+          if (isMobile && hasMovedRef.current) {
+            e.preventDefault();
+            return;
+          }
+          if (!isMobile || !isDragging) {
+            setIsOpen((prev) => !prev);
           }
         }}
         onMouseDown={handleMouseDown}
