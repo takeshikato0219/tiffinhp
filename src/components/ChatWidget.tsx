@@ -154,7 +154,7 @@ export default function ChatWidget() {
       {/* チャットボタン */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-[304px] md:bottom-[306px] left-[26px] md:left-[34px] z-50 bg-teal-dark text-white w-[71px] h-[71px] shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group rounded-full ${
+        className={`fixed bottom-[124px] md:bottom-[306px] left-[26px] md:left-[34px] z-50 bg-teal-dark text-white w-[71px] h-[71px] shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group rounded-full ${
           isOpen ? "" : "animate-chat-float-morph-rotate"
         }`}
         aria-label="チャットを開く"
@@ -172,7 +172,7 @@ export default function ChatWidget() {
 
       {/* チャットウィンドウ */}
       {isOpen && (
-        <div className="fixed bottom-[324px] left-4 md:left-6 z-50 w-[calc(100vw-2rem)] md:w-96 max-w-md h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200">
+        <div className="fixed bottom-[144px] md:bottom-[324px] left-4 md:left-6 z-50 w-[calc(100vw-2rem)] md:w-96 max-w-md h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200">
           {/* ヘッダー */}
           <div className="bg-teal-dark text-white p-4 rounded-t-2xl flex items-center justify-between">
             <div className="flex items-center gap-3">

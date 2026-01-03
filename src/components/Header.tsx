@@ -24,6 +24,20 @@ export default function Header() {
     setDotKey((prev) => prev + 1);
   }, [pathname]);
 
+  useEffect(() => {
+    // ハンバーガーメニューが開いている時にスクロールしたら閉じる
+    if (isMenuOpen) {
+      const handleScroll = () => {
+        setIsMenuOpen(false);
+      };
+
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, [isMenuOpen]);
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
