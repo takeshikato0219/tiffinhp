@@ -101,10 +101,11 @@ export default function ChatWidget() {
   
   // ドラッグ&ドロップ用の状態
   const [isMobile, setIsMobile] = useState(false);
-  const [position, setPosition] = useState({ x: 26, y: 156 }); // モバイルの初期位置: left 26px, bottom 156px (100px上げる)
+  const [position, setPosition] = useState({ x: 26, y: 76 }); // モバイルの初期位置: left 26px, bottom 76px
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const hasMovedRef = useRef(false); // ドラッグが実際に発生したかどうか
+  const touchStartRef = useRef({ x: 0, y: 0 }); // タッチ開始位置
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   // モバイル判定
@@ -247,6 +248,7 @@ export default function ChatWidget() {
     if (!isMobile) return; // PCではドラッグ無効
     hasMovedRef.current = false;
     const touch = e.touches[0];
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
     setIsDragging(true);
     const rect = buttonRef.current?.getBoundingClientRect();
     if (rect) {
@@ -261,35 +263,38 @@ export default function ChatWidget() {
     if (!isDragging || !isMobile) return;
 
     const handleTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
-      hasMovedRef.current = true;
       const touch = e.touches[0];
-      const buttonHeight = 71; // ボタンの高さ
-      const newX = touch.clientX - dragStart.x;
-      const newTop = touch.clientY - dragStart.y;
-      const newBottom = window.innerHeight - newTop - buttonHeight;
+      const deltaX = Math.abs(touch.clientX - touchStartRef.current.x);
+      const deltaY = Math.abs(touch.clientY - touchStartRef.current.y);
+      const moveThreshold = 10; // 10px以上動いたらドラッグと判定
       
-      // 画面内に制限
-      const maxX = window.innerWidth - buttonHeight;
-      const minBottom = buttonHeight;
-      const maxBottom = window.innerHeight - buttonHeight;
-      
-      setPosition({
-        x: Math.max(0, Math.min(newX, maxX)),
-        y: Math.max(minBottom, Math.min(newBottom, maxBottom)),
-      });
+      // 10px以上動いた場合のみドラッグとして扱う
+      if (deltaX > moveThreshold || deltaY > moveThreshold) {
+        e.preventDefault();
+        hasMovedRef.current = true;
+        const buttonHeight = 71; // ボタンの高さ
+        const newX = touch.clientX - dragStart.x;
+        const newTop = touch.clientY - dragStart.y;
+        const newBottom = window.innerHeight - newTop - buttonHeight;
+        
+        // 画面内に制限
+        const maxX = window.innerWidth - buttonHeight;
+        const minBottom = buttonHeight;
+        const maxBottom = window.innerHeight - buttonHeight;
+        
+        setPosition({
+          x: Math.max(0, Math.min(newX, maxX)),
+          y: Math.max(minBottom, Math.min(newBottom, maxBottom)),
+        });
+      }
     };
 
-    const handleTouchEnd = () => {
+    const handleTouchEnd = (e: TouchEvent) => {
       const wasDragging = hasMovedRef.current;
       setIsDragging(false);
-      // ドラッグが発生していない場合はクリックとして扱う
-      if (!wasDragging) {
-        setTimeout(() => {
-          setIsOpen((prev) => !prev);
-        }, 0);
-      }
+      // ドラッグが発生していない場合はクリックとして扱う（onClickで処理されるため、ここでは処理しない）
       hasMovedRef.current = false;
+      touchStartRef.current = { x: 0, y: 0 };
     };
 
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
@@ -310,9 +315,13 @@ export default function ChatWidget() {
           // モバイルでドラッグが発生した場合はクリックを無視
           if (isMobile && hasMovedRef.current) {
             e.preventDefault();
+            e.stopPropagation();
             return;
           }
-          if (!isMobile || !isDragging) {
+          // PCでは常にクリック、モバイルではドラッグ中でない場合のみクリック
+          if (!isMobile) {
+            setIsOpen((prev) => !prev);
+          } else if (!isDragging) {
             setIsOpen((prev) => !prev);
           }
         }}
