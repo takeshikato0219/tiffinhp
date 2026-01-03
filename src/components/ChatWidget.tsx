@@ -101,7 +101,7 @@ export default function ChatWidget() {
   
   // ドラッグ&ドロップ用の状態
   const [isMobile, setIsMobile] = useState(false);
-  const [position, setPosition] = useState({ x: 26, y: 56 }); // モバイルの初期位置: left 26px, bottom 56px (124-180=-56だが、実際には56px)
+  const [position, setPosition] = useState({ x: 26, y: 156 }); // モバイルの初期位置: left 26px, bottom 156px (100px上げる)
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const hasMovedRef = useRef(false); // ドラッグが実際に発生したかどうか
@@ -130,6 +130,23 @@ export default function ChatWidget() {
       inputRef.current.focus();
     }
   }, [isOpen]);
+
+  // チャットウィンドウが開いた時にbodyのoverflowを制御
+  useEffect(() => {
+    if (isMobile && isOpen) {
+      // スマホでチャットウィンドウが開いた時、bodyのoverflowを制御
+      const originalStyle = window.getComputedStyle(document.body).overflow;
+      document.body.style.overflow = 'hidden';
+      document.body.style.width = '100%';
+      document.body.style.position = 'fixed';
+      
+      return () => {
+        document.body.style.overflow = originalStyle;
+        document.body.style.width = '';
+        document.body.style.position = '';
+      };
+    }
+  }, [isMobile, isOpen]);
 
   const handleSend = () => {
     const messageText = inputValue.trim();
@@ -333,9 +350,12 @@ export default function ChatWidget() {
             bottom: isMobile ? `${position.y + 20}px` : undefined,
             left: isMobile ? '1rem' : undefined,
             right: isMobile ? '1rem' : undefined,
+            width: isMobile ? 'calc(100vw - 2rem)' : undefined,
+            maxWidth: isMobile ? 'calc(100vw - 2rem)' : undefined,
             maxHeight: isMobile ? `calc(100vh - ${position.y + 40}px)` : undefined,
             height: isMobile ? undefined : '600px',
             zIndex: 9999,
+            boxSizing: 'border-box',
           }}
           className="md:bottom-[174px] md:left-6 md:right-auto md:w-96 max-w-md md:h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200"
         >
