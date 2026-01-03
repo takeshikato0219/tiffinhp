@@ -98,6 +98,23 @@ export default function ChatWidget() {
   const [inputValue, setInputValue] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  
+  // ドラッグ&ドロップ用の状態
+  const [isMobile, setIsMobile] = useState(false);
+  const [position, setPosition] = useState({ x: 26, y: 56 }); // モバイルの初期位置: left 26px, bottom 56px (124-180=-56だが、実際には56px)
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  // モバイル判定
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -149,14 +166,126 @@ export default function ChatWidget() {
     }
   };
 
+  // ドラッグ開始
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!isMobile) return; // PCではドラッグ無効
+    e.preventDefault();
+    setIsDragging(true);
+    const rect = buttonRef.current?.getBoundingClientRect();
+    if (rect) {
+      setDragStart({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+    }
+  };
+
+  // ドラッグ中
+  useEffect(() => {
+    if (!isDragging || !isMobile) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const buttonHeight = 71; // ボタンの高さ
+      const newX = e.clientX - dragStart.x;
+      const newTop = e.clientY - dragStart.y;
+      const newBottom = window.innerHeight - newTop - buttonHeight;
+      
+      // 画面内に制限
+      const maxX = window.innerWidth - buttonHeight;
+      const minBottom = buttonHeight;
+      const maxBottom = window.innerHeight - buttonHeight;
+      
+      setPosition({
+        x: Math.max(0, Math.min(newX, maxX)),
+        y: Math.max(minBottom, Math.min(newBottom, maxBottom)),
+      });
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, dragStart, isMobile]);
+
+  // タッチイベント対応（モバイル）
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!isMobile) return; // PCではドラッグ無効
+    const touch = e.touches[0];
+    setIsDragging(true);
+    const rect = buttonRef.current?.getBoundingClientRect();
+    if (rect) {
+      setDragStart({
+        x: touch.clientX - rect.left,
+        y: touch.clientY - rect.top,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (!isDragging || !isMobile) return;
+
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const buttonHeight = 71; // ボタンの高さ
+      const newX = touch.clientX - dragStart.x;
+      const newTop = touch.clientY - dragStart.y;
+      const newBottom = window.innerHeight - newTop - buttonHeight;
+      
+      // 画面内に制限
+      const maxX = window.innerWidth - buttonHeight;
+      const minBottom = buttonHeight;
+      const maxBottom = window.innerHeight - buttonHeight;
+      
+      setPosition({
+        x: Math.max(0, Math.min(newX, maxX)),
+        y: Math.max(minBottom, Math.min(newBottom, maxBottom)),
+      });
+    };
+
+    const handleTouchEnd = () => {
+      setIsDragging(false);
+    };
+
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('touchend', handleTouchEnd);
+
+    return () => {
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [isDragging, dragStart, isMobile]);
+
   return (
     <>
       {/* チャットボタン */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-[124px] md:bottom-[306px] left-[26px] md:left-[34px] z-50 bg-teal-dark text-white w-[71px] h-[71px] shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group rounded-full ${
-          isOpen ? "" : "animate-chat-float-morph-rotate"
-        }`}
+        ref={buttonRef}
+        onClick={() => {
+          if (!isDragging) {
+            setIsOpen(!isOpen);
+          }
+        }}
+        onMouseDown={handleMouseDown}
+        onTouchStart={handleTouchStart}
+        style={{
+          position: 'fixed',
+          bottom: isMobile ? `${position.y}px` : undefined,
+          left: isMobile ? `${position.x}px` : undefined,
+          cursor: isMobile ? (isDragging ? 'grabbing' : 'grab') : 'pointer',
+          touchAction: isMobile ? 'none' : 'auto',
+          transition: isDragging ? 'none' : undefined,
+        }}
+        className={`md:bottom-[306px] md:left-[34px] z-50 bg-teal-dark text-white w-[71px] h-[71px] shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group rounded-full ${
+          isOpen || isDragging ? "" : "animate-chat-float-morph-rotate"
+        } ${isDragging ? 'scale-110' : ''}`}
         aria-label="チャットを開く"
       >
         {isOpen ? (
@@ -172,7 +301,14 @@ export default function ChatWidget() {
 
       {/* チャットウィンドウ */}
       {isOpen && (
-        <div className="fixed bottom-[144px] md:bottom-[324px] left-4 md:left-6 z-50 w-[calc(100vw-2rem)] md:w-96 max-w-md h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200">
+        <div 
+          style={{
+            position: 'fixed',
+            bottom: isMobile ? `${position.y + 20}px` : undefined,
+            left: isMobile ? '1rem' : undefined,
+          }}
+          className="md:bottom-[324px] md:left-6 z-50 w-[calc(100vw-2rem)] md:w-96 max-w-md h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200"
+        >
           {/* ヘッダー */}
           <div className="bg-teal-dark text-white p-4 rounded-t-2xl flex items-center justify-between">
             <div className="flex items-center gap-3">
