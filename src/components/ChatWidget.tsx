@@ -306,8 +306,11 @@ export default function ChatWidget() {
             position: 'fixed',
             bottom: isMobile ? `${position.y + 20}px` : undefined,
             left: isMobile ? '1rem' : undefined,
+            right: isMobile ? '1rem' : undefined,
+            maxHeight: isMobile ? `calc(100vh - ${position.y + 40}px)` : undefined,
+            height: isMobile ? undefined : '600px',
           }}
-          className="md:bottom-[324px] md:left-6 z-50 w-[calc(100vw-2rem)] md:w-96 max-w-md h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200"
+          className="md:bottom-[324px] md:left-6 md:right-auto z-50 w-[calc(100vw-2rem)] md:w-96 max-w-md md:h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200"
         >
           {/* ヘッダー */}
           <div className="bg-teal-dark text-white p-4 rounded-t-2xl flex items-center justify-between">
