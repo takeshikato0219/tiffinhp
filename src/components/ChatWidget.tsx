@@ -176,8 +176,12 @@ export default function ChatWidget() {
   // スマホの場合はQ&Aページにリダイレクト、PCの場合はポップアップを表示
   const handleChatOpen = () => {
     if (isMobile) {
-      // スマホの場合はQ&Aページに遷移
+      // スマホの場合はQ&Aページに遷移（スクロール位置をリセット）
       router.push('/qa');
+      // 遷移後にスクロール位置をリセット
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 0);
     } else {
       // PCの場合はポップアップを表示
       setIsOpen((prev) => !prev);
@@ -246,6 +250,10 @@ export default function ChatWidget() {
           // スマホの場合はQ&Aページに遷移、PCの場合はポップアップを表示
           if (isMobile) {
             router.push('/qa');
+            // 遷移後にスクロール位置をリセット
+            setTimeout(() => {
+              window.scrollTo(0, 0);
+            }, 0);
           } else {
             setIsOpen((prev) => !prev);
           }
