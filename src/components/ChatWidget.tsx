@@ -171,7 +171,23 @@ export default function ChatWidget() {
     }
   }, [isOpen]);
 
-  // チャットウィンドウが開いた時の処理（bodyのoverflow制御は削除、CSSのみで制御）
+  // チャットウィンドウが開いた時にbodyのoverflowを制御（横スクロールを防ぐ）
+  useEffect(() => {
+    if (isMobile && isOpen) {
+      // スマホでチャットウィンドウが開いた時、横スクロールを防ぐ
+      const originalBodyOverflowX = document.body.style.overflowX;
+      const originalHtmlOverflowX = document.documentElement.style.overflowX;
+      
+      document.body.style.overflowX = 'hidden';
+      document.documentElement.style.overflowX = 'hidden';
+      
+      return () => {
+        // 元のスタイルを復元
+        document.body.style.overflowX = originalBodyOverflowX;
+        document.documentElement.style.overflowX = originalHtmlOverflowX;
+      };
+    }
+  }, [isMobile, isOpen]);
 
   const handleSend = () => {
     const messageText = inputValue.trim();
@@ -385,42 +401,29 @@ export default function ChatWidget() {
         )}
       </button>
 
-      {/* モバイル用オーバーレイ */}
-      {isOpen && isMobile && (
-        <div
-          onClick={() => setIsOpen(false)}
-          className="fixed inset-0 bg-black/20 z-[9998] md:hidden"
-          aria-hidden="true"
-        />
-      )}
-
       {/* チャットウィンドウ */}
       {isOpen && (
         <div 
           ref={chatWindowRef}
           style={{
             position: 'fixed',
-            // モバイルでは全画面表示
-            top: isMobile ? 0 : undefined,
-            left: isMobile ? 0 : undefined,
-            right: isMobile ? 0 : undefined,
-            bottom: isMobile ? 0 : undefined,
-            width: isMobile ? '100%' : undefined,
-            height: isMobile ? '100%' : undefined,
-            // PCでは従来通り
+            bottom: isMobile ? `${position.y + 20}px` : undefined,
+            left: isMobile ? '16px' : undefined,
+            right: isMobile ? '16px' : undefined,
+            width: isMobile ? undefined : undefined, // left/rightで自動計算
+            maxWidth: isMobile ? 'calc(100vw - 32px)' : undefined, // 確実に画面内に収める
+            minWidth: isMobile ? 0 : undefined,
+            maxHeight: isMobile ? `calc(100vh - ${position.y + 40}px)` : undefined,
+            height: isMobile ? undefined : '600px',
             zIndex: 9999,
             boxSizing: 'border-box',
             overflow: 'hidden',
             WebkitOverflowScrolling: 'touch',
           }}
-          className={`md:bottom-[254px] md:left-[34px] md:right-auto md:w-96 md:h-[600px] md:max-w-md md:rounded-2xl bg-white shadow-2xl flex flex-col ${
-            isMobile ? 'rounded-none' : 'border border-gray-200'
-          }`}
+          className="md:bottom-[254px] md:left-[34px] md:right-auto md:w-96 max-w-md md:h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200"
         >
           {/* ヘッダー */}
-          <div className={`bg-teal-dark text-white p-3 sm:p-4 flex items-center justify-between min-w-0 ${
-            isMobile ? '' : 'rounded-t-2xl'
-          }`}>
+          <div className="bg-teal-dark text-white p-3 sm:p-4 rounded-t-2xl flex items-center justify-between min-w-0">
             <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
               <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
                 <span className="text-base sm:text-lg font-bold">T</span>
@@ -463,9 +466,7 @@ export default function ChatWidget() {
           </div>
 
           {/* 入力エリア */}
-          <div className={`p-3 sm:p-4 border-t border-gray-200 bg-white min-w-0 ${
-            isMobile ? '' : 'rounded-b-2xl'
-          }`}>
+          <div className="p-3 sm:p-4 border-t border-gray-200 bg-white rounded-b-2xl min-w-0">
             <div className="flex gap-2 items-center min-w-0">
               <input
                 ref={inputRef}
