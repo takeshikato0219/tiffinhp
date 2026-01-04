@@ -136,13 +136,6 @@ export default function ChatWidget() {
       const width = getViewportWidth();
       setIsMobile(width < 1024);
       setViewportWidth(width);
-      
-      // チャットウィンドウが開いている場合は幅を更新
-      if (isOpen && isMobile && chatWindowRef.current) {
-        const chatWidth = width - 32;
-        chatWindowRef.current.style.width = `${chatWidth}px`;
-        chatWindowRef.current.style.maxWidth = `${chatWidth}px`;
-      }
     };
     
     checkMobile();
@@ -178,24 +171,7 @@ export default function ChatWidget() {
     }
   }, [isOpen]);
 
-  // チャットウィンドウが開いた時にbodyのoverflowを制御
-  useEffect(() => {
-    if (isMobile && isOpen) {
-      // スマホでチャットウィンドウが開いた時、横スクロールを防ぐ（より軽量な方法）
-      const originalBodyOverflowX = document.body.style.overflowX;
-      const originalHtmlOverflowX = document.documentElement.style.overflowX;
-      
-      // 横スクロールのみを防ぐ（縦スクロールは維持、幅は変更しない）
-      document.body.style.overflowX = 'hidden';
-      document.documentElement.style.overflowX = 'hidden';
-      
-      return () => {
-        // 元のスタイルを復元
-        document.body.style.overflowX = originalBodyOverflowX;
-        document.documentElement.style.overflowX = originalHtmlOverflowX;
-      };
-    }
-  }, [isMobile, isOpen]);
+  // チャットウィンドウが開いた時の処理（bodyのoverflow制御は削除、CSSのみで制御）
 
   const handleSend = () => {
     const messageText = inputValue.trim();
@@ -418,8 +394,8 @@ export default function ChatWidget() {
             bottom: isMobile ? `${position.y + 20}px` : undefined,
             left: isMobile ? '16px' : undefined,
             right: isMobile ? '16px' : undefined,
-            width: isMobile ? 'calc(100% - 32px)' : undefined,
-            maxWidth: isMobile ? 'calc(100% - 32px)' : undefined,
+            width: isMobile ? undefined : undefined, // left/rightで自動計算
+            maxWidth: isMobile ? 'none' : undefined,
             minWidth: isMobile ? 0 : undefined,
             maxHeight: isMobile ? `calc(100vh - ${position.y + 40}px)` : undefined,
             height: isMobile ? undefined : '600px',

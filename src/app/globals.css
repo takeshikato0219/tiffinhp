@@ -54,22 +54,19 @@
     height: auto;
   }
   
-  /* 固定要素の幅制限（Safari対応） */
+  /* 固定要素の幅制限 */
   [style*="position: fixed"] {
-    max-width: 100%;
+    max-width: 100vw;
     box-sizing: border-box;
   }
   
-  /* Safari用：ビューポート幅の制限 */
-  @supports (-webkit-touch-callout: none) {
-    html {
+  /* モバイルでの幅制限を強化 */
+  @media (max-width: 1023px) {
+    html, body {
       width: 100%;
-      max-width: 100%;
-    }
-    
-    body {
-      width: 100%;
-      max-width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+      position: relative;
     }
   }
 
