@@ -163,32 +163,32 @@ export default function QAPage() {
   return (
     <main className="min-h-screen flex flex-col relative bg-white">
       <Header />
-      <section className="pt-32 pb-20 bg-white relative z-10 flex-grow">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+      <section className="pt-20 sm:pt-32 pb-4 sm:pb-20 bg-white relative z-10 flex-grow">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-4 sm:mb-8">
           <Breadcrumb items={[{ label: "Q&A", href: "/qa" }]} />
-          <h1 className="text-2xl font-bold text-gray-900 tracking-wider mb-8">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 tracking-wider mb-4 sm:mb-8">
             TIFFIN Q&A
           </h1>
         </div>
         
         {/* チャットエリア */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 flex flex-col" style={{ height: 'calc(100vh - 300px)', minHeight: '500px', maxHeight: 'calc(100vh - 200px)' }}>
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 flex flex-col" style={{ height: 'calc(100vh - 200px)', minHeight: '400px', maxHeight: 'calc(100vh - 180px)' }}>
             {/* メッセージエリア */}
-            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-gray-50 min-w-0" style={{ WebkitOverflowScrolling: 'touch' }}>
+            <div className="flex-1 overflow-y-auto p-3 sm:p-6 space-y-3 sm:space-y-4 bg-gray-50 min-w-0" style={{ WebkitOverflowScrolling: 'touch' }}>
               {messages.map((message) => (
                 <div
                   key={message.id}
                   className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"} min-w-0`}
                 >
                   <div
-                    className={`max-w-[85%] sm:max-w-[80%] rounded-2xl px-4 py-3 min-w-0 ${
+                    className={`max-w-[85%] sm:max-w-[80%] rounded-2xl px-3 py-2 sm:px-4 sm:py-3 min-w-0 ${
                       message.sender === "user"
                         ? "bg-teal-dark text-white"
                         : "bg-white text-gray-900 border border-gray-200"
                     }`}
                   >
-                    <p className="text-sm sm:text-base whitespace-pre-wrap break-words overflow-wrap-anywhere">{message.text}</p>
+                    <p className="text-xs sm:text-base whitespace-pre-wrap break-words overflow-wrap-anywhere">{message.text}</p>
                   </div>
                 </div>
               ))}
@@ -196,7 +196,7 @@ export default function QAPage() {
             </div>
 
             {/* 入力エリア */}
-            <div className="p-4 sm:p-6 border-t border-gray-200 bg-white rounded-b-2xl min-w-0">
+            <div className="p-3 sm:p-6 border-t border-gray-200 bg-white rounded-b-2xl min-w-0">
               <div className="flex gap-2 items-center min-w-0">
                 <input
                   ref={inputRef}
