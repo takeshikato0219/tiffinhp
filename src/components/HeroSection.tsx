@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const messages = [
   { line1: "AI開発・AIウェブ開発の", line2: "専門企業として実績多数" },
-  { line1: "音声AI・画像AI・チャットAI", line2: "あらゆるAI開発を新潟から" },
+  { line1: "音声AI・画像AI・チャットAI", line2: "あらゆるAI開発に新潟から対応" },
   { line1: "ITシステム開発とAIを融合", line2: "最適なソリューションを提供" },
   { line1: "多数の特許を保有し", line2: "特許ライセンス業も展開" },
   { line1: "AIコンサルティングから", line2: "開発まで一貫サポート" },
