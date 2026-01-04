@@ -171,7 +171,31 @@ export default function ChatWidget() {
     }
   }, [isOpen]);
 
-  // チャットウィンドウの幅制御は不要（left/rightで自動計算）
+  // チャットウィンドウが開いた時にページ全体の幅を固定（レイアウト崩れを防ぐ）
+  useEffect(() => {
+    if (isMobile && isOpen) {
+      // main要素の幅を固定
+      const mainElement = document.querySelector('main');
+      if (mainElement) {
+        const originalWidth = mainElement.style.width;
+        const originalMaxWidth = mainElement.style.maxWidth;
+        const originalPosition = mainElement.style.position;
+        
+        // 現在の幅を取得して固定
+        const currentWidth = mainElement.getBoundingClientRect().width;
+        mainElement.style.width = `${currentWidth}px`;
+        mainElement.style.maxWidth = `${currentWidth}px`;
+        mainElement.style.position = 'relative';
+        
+        return () => {
+          // 元に戻す
+          mainElement.style.width = originalWidth;
+          mainElement.style.maxWidth = originalMaxWidth;
+          mainElement.style.position = originalPosition;
+        };
+      }
+    }
+  }, [isMobile, isOpen]);
 
   const handleSend = () => {
     const messageText = inputValue.trim();
@@ -393,9 +417,9 @@ export default function ChatWidget() {
             position: 'fixed',
             bottom: isMobile ? `${position.y + 20}px` : undefined,
             left: isMobile ? '16px' : undefined,
-            right: isMobile ? '16px' : undefined, // left/rightで幅を自動計算
-            width: isMobile ? undefined : undefined, // left/rightで自動計算
-            maxWidth: isMobile ? 'none' : undefined, // maxWidthは不要
+            right: isMobile ? '16px' : undefined,
+            width: isMobile ? 'calc(100% - 32px)' : undefined, // 明示的に幅を設定
+            maxWidth: isMobile ? 'calc(100% - 32px)' : undefined, // 確実に制限
             minWidth: isMobile ? 0 : undefined,
             maxHeight: isMobile ? `calc(100vh - ${position.y + 40}px)` : undefined,
             height: isMobile ? undefined : '600px',
@@ -403,6 +427,10 @@ export default function ChatWidget() {
             boxSizing: 'border-box',
             overflow: 'hidden',
             WebkitOverflowScrolling: 'touch',
+            // 完全に独立したレイヤーとして扱う
+            transform: 'translateZ(0)',
+            isolation: 'isolate',
+            contain: 'strict',
           }}
           className="md:bottom-[254px] md:left-[34px] md:right-auto md:w-96 max-w-md md:h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200"
         >
