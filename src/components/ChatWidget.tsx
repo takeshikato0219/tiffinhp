@@ -233,75 +233,7 @@ export default function ChatWidget() {
     return;
   }, [isDragging, dragStart, isMobile]);
 
-  // タッチイベント対応（スマホではQ&Aページに遷移するため、ドラッグは無効）
-  const handleTouchStart = (e: React.TouchEvent) => {
-    // スマホではQ&Aページに遷移するため、ドラッグ機能は無効
-    e.stopPropagation();
-    isTouchEventRef.current = true;
-  };
-
   // スマホではドラッグ機能を無効化（Q&Aページに遷移するため）
-  useEffect(() => {
-    // スマホではドラッグ機能を無効化
-    return;
-  }, [isDragging, isMobile]);
-
-  useEffect(() => {
-    if (!isDragging || !isMobile) return;
-
-    const handleTouchMove = (e: TouchEvent) => {
-      const touch = e.touches[0];
-      const deltaX = Math.abs(touch.clientX - touchStartRef.current.x);
-      const deltaY = Math.abs(touch.clientY - touchStartRef.current.y);
-      const moveThreshold = 10; // 10px以上動いたらドラッグと判定
-      
-      // 10px以上動いた場合のみドラッグとして扱う
-      if (deltaX > moveThreshold || deltaY > moveThreshold) {
-        e.preventDefault();
-        hasMovedRef.current = true;
-        const buttonHeight = 61; // ボタンの高さ（10px小さく）
-        const newX = touch.clientX - dragStart.x;
-        const newTop = touch.clientY - dragStart.y;
-        const newBottom = window.innerHeight - newTop - buttonHeight;
-        
-        // 画面内に制限
-        const maxX = window.innerWidth - buttonHeight;
-        const minBottom = buttonHeight;
-        const maxBottom = window.innerHeight - buttonHeight;
-        
-        setPosition({
-          x: Math.max(0, Math.min(newX, maxX)),
-          y: Math.max(minBottom, Math.min(newBottom, maxBottom)),
-        });
-      }
-    };
-
-    const handleTouchEnd = (e: TouchEvent) => {
-      const wasDragging = hasMovedRef.current;
-      setIsDragging(false);
-      
-      // ドラッグが発生していない場合はクリックとして扱う
-      if (!wasDragging) {
-        // スマホの場合はQ&Aページに遷移
-        router.push('/qa');
-      }
-      
-      // 少し遅延させてからリセット（クリックイベントとの競合を避ける）
-      setTimeout(() => {
-        hasMovedRef.current = false;
-        isTouchEventRef.current = false;
-        touchStartRef.current = { x: 0, y: 0 };
-      }, 50);
-    };
-
-    window.addEventListener('touchmove', handleTouchMove, { passive: false });
-    window.addEventListener('touchend', handleTouchEnd);
-
-    return () => {
-      window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('touchend', handleTouchEnd);
-    };
-  }, [isDragging, dragStart, isMobile]);
 
   return (
     <>
@@ -309,19 +241,10 @@ export default function ChatWidget() {
       <button
         ref={buttonRef}
         onClick={(e) => {
-          // モバイルでタッチイベントが発生した場合はクリックを無視
-          if (isMobile && isTouchEventRef.current) {
-            e.preventDefault();
-            e.stopPropagation();
-            return;
-          }
-          // スマホの場合はQ&Aページに遷移、PCの場合はポップアップを表示
-          if (!isMobile || !isTouchEventRef.current) {
-            handleChatOpen();
-          }
+          e.preventDefault();
+          e.stopPropagation();
+          handleChatOpen();
         }}
-        onMouseDown={handleMouseDown}
-        onTouchStart={handleTouchStart}
         style={{
           position: 'fixed',
           bottom: isMobile ? `${position.y}px` : undefined,
