@@ -137,15 +137,27 @@ export default function ChatWidget() {
   useEffect(() => {
     if (isMobile && isOpen) {
       // スマホでチャットウィンドウが開いた時、bodyのoverflowを制御
-      const originalStyle = window.getComputedStyle(document.body).overflow;
+      const scrollY = window.scrollY;
+      const originalOverflow = document.body.style.overflow;
+      const originalWidth = document.body.style.width;
+      const originalPosition = document.body.style.position;
+      const originalTop = document.body.style.top;
+      
       document.body.style.overflow = 'hidden';
       document.body.style.width = '100%';
       document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
       
       return () => {
-        document.body.style.overflow = originalStyle;
-        document.body.style.width = '';
-        document.body.style.position = '';
+        document.body.style.overflow = originalOverflow;
+        document.body.style.width = originalWidth;
+        document.body.style.position = originalPosition;
+        document.body.style.top = originalTop;
+        document.body.style.left = '';
+        document.body.style.right = '';
+        window.scrollTo(0, scrollY);
       };
     }
   }, [isMobile, isOpen]);
@@ -368,26 +380,28 @@ export default function ChatWidget() {
           style={{
             position: 'fixed',
             bottom: isMobile ? `${position.y + 20}px` : undefined,
-            left: isMobile ? '1rem' : undefined,
-            right: isMobile ? '1rem' : undefined,
-            width: isMobile ? 'calc(100vw - 2rem)' : undefined,
-            maxWidth: isMobile ? 'calc(100vw - 2rem)' : undefined,
+            left: isMobile ? '16px' : undefined,
+            right: isMobile ? '16px' : undefined,
+            width: isMobile ? 'calc(100% - 32px)' : undefined,
+            maxWidth: isMobile ? 'calc(100% - 32px)' : undefined,
+            minWidth: isMobile ? 0 : undefined,
             maxHeight: isMobile ? `calc(100vh - ${position.y + 40}px)` : undefined,
             height: isMobile ? undefined : '600px',
             zIndex: 9999,
             boxSizing: 'border-box',
+            overflow: 'hidden',
           }}
           className="md:bottom-[174px] md:left-6 md:right-auto md:w-96 max-w-md md:h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200"
         >
           {/* ヘッダー */}
-          <div className="bg-teal-dark text-white p-3 sm:p-4 rounded-t-2xl flex items-center justify-between">
-            <div className="flex items-center gap-2 sm:gap-3">
+          <div className="bg-teal-dark text-white p-3 sm:p-4 rounded-t-2xl flex items-center justify-between min-w-0">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
               <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
                 <span className="text-base sm:text-lg font-bold">T</span>
               </div>
-              <div className="min-w-0">
-                <h3 className="font-bold text-sm sm:text-base">TIFFIN Q&A</h3>
-                <p className="text-xs text-white/80">通常すぐに応答します</p>
+              <div className="min-w-0 flex-1">
+                <h3 className="font-bold text-sm sm:text-base truncate">TIFFIN Q&A</h3>
+                <p className="text-xs text-white/80 truncate">通常すぐに応答します</p>
               </div>
             </div>
             <button
@@ -402,20 +416,20 @@ export default function ChatWidget() {
           </div>
 
           {/* メッセージエリア */}
-          <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 bg-gray-50">
+          <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 bg-gray-50 min-w-0">
             {messages.map((message) => (
               <div
                 key={message.id}
-                className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}
+                className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"} min-w-0`}
               >
                 <div
-                  className={`max-w-[85%] sm:max-w-[80%] rounded-2xl px-3 py-2 sm:px-4 ${
+                  className={`max-w-[85%] sm:max-w-[80%] rounded-2xl px-3 py-2 sm:px-4 min-w-0 ${
                     message.sender === "user"
                       ? "bg-teal-dark text-white"
                       : "bg-white text-gray-900 border border-gray-200"
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap break-words">{message.text}</p>
+                  <p className="text-sm whitespace-pre-wrap break-words overflow-wrap-anywhere">{message.text}</p>
                 </div>
               </div>
             ))}
@@ -423,8 +437,8 @@ export default function ChatWidget() {
           </div>
 
           {/* 入力エリア */}
-          <div className="p-3 sm:p-4 border-t border-gray-200 bg-white rounded-b-2xl">
-            <div className="flex gap-2 items-center">
+          <div className="p-3 sm:p-4 border-t border-gray-200 bg-white rounded-b-2xl min-w-0">
+            <div className="flex gap-2 items-center min-w-0">
               <input
                 ref={inputRef}
                 type="text"
@@ -432,7 +446,8 @@ export default function ChatWidget() {
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="メッセージを入力..."
-                className="flex-1 px-3 py-2 sm:px-4 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-dark focus:border-transparent"
+                className="flex-1 min-w-0 px-3 py-2 sm:px-4 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-dark focus:border-transparent"
+                style={{ width: 0 }} // flex-1と組み合わせて幅を制御
               />
               <button
                 onClick={handleSend}
