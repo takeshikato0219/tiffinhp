@@ -236,50 +236,10 @@ export default function ChatWidget() {
   };
 
   // ドラッグ中
+  // PCではドラッグ機能を使用しない（スマホではQ&Aページに遷移するため）
   useEffect(() => {
-    if (!isDragging || !isMobile) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      e.preventDefault();
-      hasMovedRef.current = true;
-      const buttonHeight = 71; // ボタンの高さ
-      const newX = e.clientX - dragStart.x;
-      const newTop = e.clientY - dragStart.y;
-      const newBottom = window.innerHeight - newTop - buttonHeight;
-      
-      // 画面内に制限
-      const maxX = window.innerWidth - buttonHeight;
-      const minBottom = buttonHeight;
-      const maxBottom = window.innerHeight - buttonHeight;
-      
-      setPosition({
-        x: Math.max(0, Math.min(newX, maxX)),
-        y: Math.max(minBottom, Math.min(newBottom, maxBottom)),
-      });
-    };
-
-    const handleMouseUp = () => {
-      const wasDragging = hasMovedRef.current;
-      setIsDragging(false);
-      // ドラッグが発生していない場合はクリックとして扱う
-      if (!wasDragging) {
-        // PCの場合はポップアップを表示（スマホの場合は既にhandleTouchEndで処理）
-        if (!isMobile) {
-          setTimeout(() => {
-            setIsOpen((prev) => !prev);
-          }, 0);
-        }
-      }
-      hasMovedRef.current = false;
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
+    // ドラッグ機能は無効化
+    return;
   }, [isDragging, dragStart, isMobile]);
 
   // タッチイベント対応（スマホではQ&Aページに遷移するため、ドラッグは無効）
