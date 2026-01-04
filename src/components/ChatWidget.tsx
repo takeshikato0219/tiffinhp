@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 interface Message {
   id: number;
@@ -86,6 +87,7 @@ const generateResponse = (userMessage: string): string => {
 };
 
 export default function ChatWidget() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -171,31 +173,16 @@ export default function ChatWidget() {
     }
   }, [isOpen]);
 
-  // チャットウィンドウが開いた時にページ全体の幅を固定（レイアウト崩れを防ぐ）
-  useEffect(() => {
-    if (isMobile && isOpen) {
-      // main要素の幅を固定
-      const mainElement = document.querySelector('main');
-      if (mainElement) {
-        const originalWidth = mainElement.style.width;
-        const originalMaxWidth = mainElement.style.maxWidth;
-        const originalPosition = mainElement.style.position;
-        
-        // 現在の幅を取得して固定
-        const currentWidth = mainElement.getBoundingClientRect().width;
-        mainElement.style.width = `${currentWidth}px`;
-        mainElement.style.maxWidth = `${currentWidth}px`;
-        mainElement.style.position = 'relative';
-        
-        return () => {
-          // 元に戻す
-          mainElement.style.width = originalWidth;
-          mainElement.style.maxWidth = originalMaxWidth;
-          mainElement.style.position = originalPosition;
-        };
-      }
+  // スマホの場合はQ&Aページにリダイレクト、PCの場合はポップアップを表示
+  const handleChatOpen = () => {
+    if (isMobile) {
+      // スマホの場合はQ&Aページに遷移
+      router.push('/qa');
+    } else {
+      // PCの場合はポップアップを表示
+      setIsOpen((prev) => !prev);
     }
-  }, [isMobile, isOpen]);
+  };
 
   const handleSend = () => {
     const messageText = inputValue.trim();
@@ -233,9 +220,10 @@ export default function ChatWidget() {
     }
   };
 
-  // ドラッグ開始
+  // ドラッグ開始（PCでは使用しない）
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (!isMobile) return; // PCではドラッグ無効
+    // PCではドラッグ無効、スマホではQ&Aページに遷移するためドラッグも無効
+    return;
     hasMovedRef.current = false;
     setIsDragging(true);
     const rect = buttonRef.current?.getBoundingClientRect();
@@ -275,9 +263,12 @@ export default function ChatWidget() {
       setIsDragging(false);
       // ドラッグが発生していない場合はクリックとして扱う
       if (!wasDragging) {
-        setTimeout(() => {
-          setIsOpen((prev) => !prev);
-        }, 0);
+        // PCの場合はポップアップを表示（スマホの場合は既にhandleTouchEndで処理）
+        if (!isMobile) {
+          setTimeout(() => {
+            setIsOpen((prev) => !prev);
+          }, 0);
+        }
       }
       hasMovedRef.current = false;
     };
@@ -291,23 +282,18 @@ export default function ChatWidget() {
     };
   }, [isDragging, dragStart, isMobile]);
 
-  // タッチイベント対応（モバイル）
+  // タッチイベント対応（スマホではQ&Aページに遷移するため、ドラッグは無効）
   const handleTouchStart = (e: React.TouchEvent) => {
-    if (!isMobile) return; // PCではドラッグ無効
-    e.stopPropagation(); // クリックイベントの伝播を防ぐ
-    hasMovedRef.current = false;
+    // スマホではQ&Aページに遷移するため、ドラッグ機能は無効
+    e.stopPropagation();
     isTouchEventRef.current = true;
-    const touch = e.touches[0];
-    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
-    setIsDragging(true);
-    const rect = buttonRef.current?.getBoundingClientRect();
-    if (rect) {
-      setDragStart({
-        x: touch.clientX - rect.left,
-        y: touch.clientY - rect.top,
-      });
-    }
   };
+
+  // スマホではドラッグ機能を無効化（Q&Aページに遷移するため）
+  useEffect(() => {
+    // スマホではドラッグ機能を無効化
+    return;
+  }, [isDragging, isMobile]);
 
   useEffect(() => {
     if (!isDragging || !isMobile) return;
@@ -345,8 +331,8 @@ export default function ChatWidget() {
       
       // ドラッグが発生していない場合はクリックとして扱う
       if (!wasDragging) {
-        // 即座にクリック処理を実行
-        setIsOpen((prev) => !prev);
+        // スマホの場合はQ&Aページに遷移
+        router.push('/qa');
       }
       
       // 少し遅延させてからリセット（クリックイベントとの競合を避ける）
@@ -378,9 +364,9 @@ export default function ChatWidget() {
             e.stopPropagation();
             return;
           }
-          // PCでは常にクリック、モバイルでタッチイベントが発生していない場合のみクリック
+          // スマホの場合はQ&Aページに遷移、PCの場合はポップアップを表示
           if (!isMobile || !isTouchEventRef.current) {
-            setIsOpen((prev) => !prev);
+            handleChatOpen();
           }
         }}
         onMouseDown={handleMouseDown}
@@ -409,8 +395,8 @@ export default function ChatWidget() {
         )}
       </button>
 
-      {/* チャットウィンドウ */}
-      {isOpen && (
+      {/* チャットウィンドウ（PCのみ表示、スマホはQ&Aページに遷移） */}
+      {isOpen && !isMobile && (
         <div 
           ref={chatWindowRef}
           style={{
