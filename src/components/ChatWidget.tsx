@@ -171,8 +171,49 @@ export default function ChatWidget() {
     }
   }, [isOpen]);
 
-  // チャットウィンドウが開いた時にbodyのoverflowを制御しない
-  // bodyやhtmlのスタイルを変更するとページ全体のレイアウトが崩れるため、チャットウィンドウ自体のスタイルで制御
+  // チャットウィンドウが開いた時に幅を計算して設定
+  useEffect(() => {
+    if (isMobile && isOpen && chatWindowRef.current) {
+      const getViewportWidth = () => {
+        const docEl = document.documentElement;
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        if (isSafari) {
+          return docEl.clientWidth || window.innerWidth || 0;
+        } else {
+          return window.innerWidth || docEl.clientWidth || 0;
+        }
+      };
+      
+      const updateWidth = () => {
+        if (chatWindowRef.current) {
+          const vw = getViewportWidth();
+          const chatWidth = Math.min(vw - 32, vw - 32); // 左右16pxずつのマージン
+          chatWindowRef.current.style.width = `${chatWidth}px`;
+          chatWindowRef.current.style.maxWidth = `${chatWidth}px`;
+        }
+      };
+      
+      // 即座に更新
+      updateWidth();
+      
+      // リサイズ時も更新
+      const handleResize = () => {
+        updateWidth();
+      };
+      
+      window.addEventListener('resize', handleResize);
+      window.addEventListener('orientationchange', handleResize);
+      
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        window.removeEventListener('orientationchange', handleResize);
+        if (chatWindowRef.current) {
+          chatWindowRef.current.style.width = '';
+          chatWindowRef.current.style.maxWidth = '';
+        }
+      };
+    }
+  }, [isMobile, isOpen]);
 
   const handleSend = () => {
     const messageText = inputValue.trim();
@@ -394,9 +435,9 @@ export default function ChatWidget() {
             position: 'fixed',
             bottom: isMobile ? `${position.y + 20}px` : undefined,
             left: isMobile ? '16px' : undefined,
-            right: isMobile ? '16px' : undefined,
-            width: isMobile ? undefined : undefined, // left/rightで自動計算（100vwを使わない）
-            maxWidth: isMobile ? 'none' : undefined, // maxWidthを削除（left/rightで制御）
+            right: isMobile ? 'auto' : undefined, // rightをautoにして、widthで制御
+            width: isMobile ? undefined : undefined, // JavaScriptで動的に設定
+            maxWidth: isMobile ? undefined : undefined, // JavaScriptで動的に設定
             minWidth: isMobile ? 0 : undefined,
             maxHeight: isMobile ? `calc(100vh - ${position.y + 40}px)` : undefined,
             height: isMobile ? undefined : '600px',
