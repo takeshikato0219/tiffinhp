@@ -166,9 +166,9 @@ export default function QAPage() {
         
         {/* チャットエリア */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 flex flex-col" style={{ height: 'calc(100vh - 300px)', minHeight: '500px' }}>
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 flex flex-col" style={{ height: 'calc(100vh - 300px)', minHeight: '500px', maxHeight: 'calc(100vh - 200px)' }}>
             {/* メッセージエリア */}
-            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-gray-50 min-w-0">
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-gray-50 min-w-0" style={{ WebkitOverflowScrolling: 'touch' }}>
               {messages.map((message) => (
                 <div
                   key={message.id}
