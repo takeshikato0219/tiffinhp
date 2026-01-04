@@ -220,19 +220,10 @@ export default function ChatWidget() {
     }
   };
 
-  // ドラッグ開始（PCでは使用しない）
+  // ドラッグ開始（PCでは使用しない、スマホではQ&Aページに遷移するためドラッグも無効）
   const handleMouseDown = (e: React.MouseEvent) => {
-    // PCではドラッグ無効、スマホではQ&Aページに遷移するためドラッグも無効
+    // ドラッグ機能は無効化
     return;
-    hasMovedRef.current = false;
-    setIsDragging(true);
-    const rect = buttonRef.current?.getBoundingClientRect();
-    if (rect) {
-      setDragStart({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      });
-    }
   };
 
   // ドラッグ中
