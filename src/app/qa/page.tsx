@@ -112,6 +112,9 @@ export default function QAPage() {
   }, [messages]);
 
   useEffect(() => {
+    // ページが一番上からスタートするようにスクロール位置をリセット
+    window.scrollTo(0, 0);
+    
     // 初期メッセージを確実に表示するため、少し遅延させてスクロール
     const timer = setTimeout(() => {
       scrollToBottom();
