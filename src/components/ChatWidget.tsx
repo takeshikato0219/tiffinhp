@@ -254,8 +254,8 @@ export default function ChatWidget() {
           position: 'fixed',
           bottom: isMobile ? `${position.y}px` : undefined,
           left: isMobile ? `${position.x}px` : undefined,
-          cursor: isMobile ? (isDragging ? 'grabbing' : 'grab') : 'pointer',
-          touchAction: isMobile ? 'pan-y' : 'auto',
+          cursor: 'pointer',
+          touchAction: 'manipulation',
           transition: isDragging ? 'none' : undefined,
         }}
         className={`md:bottom-[236px] md:left-[44px] z-[9999] bg-teal-dark text-white w-[61px] h-[61px] md:w-[71px] md:h-[71px] shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group rounded-full ${
