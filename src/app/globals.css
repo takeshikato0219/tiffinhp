@@ -54,10 +54,23 @@
     height: auto;
   }
   
-  /* 固定要素の幅制限 */
+  /* 固定要素の幅制限（Safari対応） */
   [style*="position: fixed"] {
-    max-width: 100vw;
+    max-width: 100%;
     box-sizing: border-box;
+  }
+  
+  /* Safari用：ビューポート幅の制限 */
+  @supports (-webkit-touch-callout: none) {
+    html {
+      width: 100%;
+      max-width: 100%;
+    }
+    
+    body {
+      width: 100%;
+      max-width: 100%;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {

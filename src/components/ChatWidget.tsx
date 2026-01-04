@@ -115,20 +115,34 @@ export default function ChatWidget() {
   useEffect(() => {
     const getViewportWidth = () => {
       // 実際のビューポート幅を取得（スクロールバーを除く）
-      // SafariとChromeの両方で動作する方法
+      // Safariではdocument.documentElement.clientWidthが最も正確
+      // Chromeではwindow.innerWidthが正確
       const docEl = document.documentElement;
       const body = document.body;
-      return Math.max(
-        docEl.clientWidth || 0,
-        body.clientWidth || 0,
-        window.innerWidth || 0
-      );
+      
+      // Safari検出
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      
+      if (isSafari) {
+        // SafariではclientWidthを使用
+        return docEl.clientWidth || window.innerWidth || 0;
+      } else {
+        // ChromeなどではinnerWidthを使用
+        return window.innerWidth || docEl.clientWidth || 0;
+      }
     };
 
     const checkMobile = () => {
       const width = getViewportWidth();
       setIsMobile(width < 1024);
       setViewportWidth(width);
+      
+      // チャットウィンドウが開いている場合は幅を更新
+      if (isOpen && isMobile && chatWindowRef.current) {
+        const chatWidth = width - 32;
+        chatWindowRef.current.style.width = `${chatWidth}px`;
+        chatWindowRef.current.style.maxWidth = `${chatWidth}px`;
+      }
     };
     
     checkMobile();
@@ -167,18 +181,44 @@ export default function ChatWidget() {
   // チャットウィンドウが開いた時にbodyのoverflowを制御
   useEffect(() => {
     if (isMobile && isOpen) {
+      // Safari用：実際のビューポート幅を取得
+      const getActualViewportWidth = () => {
+        // Safariではdocument.documentElement.clientWidthが正確
+        return document.documentElement.clientWidth || window.innerWidth;
+      };
+      
+      const actualWidth = getActualViewportWidth();
+      
       // スマホでチャットウィンドウが開いた時、横スクロールを防ぐ
       const originalBodyOverflowX = document.body.style.overflowX;
+      const originalBodyWidth = document.body.style.width;
       const originalHtmlOverflowX = document.documentElement.style.overflowX;
+      const originalHtmlWidth = document.documentElement.style.width;
       
       // 横スクロールのみを防ぐ（縦スクロールは維持）
       document.body.style.overflowX = 'hidden';
+      document.body.style.width = `${actualWidth}px`;
+      document.body.style.maxWidth = `${actualWidth}px`;
+      
       document.documentElement.style.overflowX = 'hidden';
+      document.documentElement.style.width = `${actualWidth}px`;
+      document.documentElement.style.maxWidth = `${actualWidth}px`;
+      
+      // チャットウィンドウの幅も調整
+      if (chatWindowRef.current) {
+        const chatWidth = actualWidth - 32;
+        chatWindowRef.current.style.width = `${chatWidth}px`;
+        chatWindowRef.current.style.maxWidth = `${chatWidth}px`;
+      }
       
       return () => {
         // 元のスタイルを復元
         document.body.style.overflowX = originalBodyOverflowX;
+        document.body.style.width = originalBodyWidth;
+        document.body.style.maxWidth = '';
         document.documentElement.style.overflowX = originalHtmlOverflowX;
+        document.documentElement.style.width = originalHtmlWidth;
+        document.documentElement.style.maxWidth = '';
       };
     }
   }, [isMobile, isOpen]);
@@ -404,8 +444,8 @@ export default function ChatWidget() {
             bottom: isMobile ? `${position.y + 20}px` : undefined,
             left: isMobile ? '16px' : undefined,
             right: isMobile ? '16px' : undefined,
-            width: isMobile ? 'calc(100% - 32px)' : undefined,
-            maxWidth: isMobile ? 'calc(100% - 32px)' : undefined,
+            width: isMobile ? (viewportWidth > 0 ? `${viewportWidth - 32}px` : 'calc(100% - 32px)') : undefined,
+            maxWidth: isMobile ? (viewportWidth > 0 ? `${viewportWidth - 32}px` : 'calc(100% - 32px)') : undefined,
             minWidth: isMobile ? 0 : undefined,
             maxHeight: isMobile ? `calc(100vh - ${position.y + 40}px)` : undefined,
             height: isMobile ? undefined : '600px',
