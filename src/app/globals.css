@@ -54,17 +54,15 @@
     height: auto;
   }
   
-  /* 固定要素の幅制限 */
+  /* 固定要素の幅制限（100vwは使わない - スクロールバーを含むため） */
   [style*="position: fixed"] {
-    max-width: 100vw;
     box-sizing: border-box;
   }
   
-  /* モバイルでの幅制限を強化 */
+  /* モバイルでの幅制限を強化（100vwは使わない） */
   @media (max-width: 1023px) {
     html, body {
       width: 100%;
-      max-width: 100vw;
       overflow-x: hidden;
       position: relative;
     }

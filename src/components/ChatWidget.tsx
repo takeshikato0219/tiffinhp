@@ -171,49 +171,7 @@ export default function ChatWidget() {
     }
   }, [isOpen]);
 
-  // チャットウィンドウが開いた時に幅を計算して設定
-  useEffect(() => {
-    if (isMobile && isOpen && chatWindowRef.current) {
-      const getViewportWidth = () => {
-        const docEl = document.documentElement;
-        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-        if (isSafari) {
-          return docEl.clientWidth || window.innerWidth || 0;
-        } else {
-          return window.innerWidth || docEl.clientWidth || 0;
-        }
-      };
-      
-      const updateWidth = () => {
-        if (chatWindowRef.current) {
-          const vw = getViewportWidth();
-          const chatWidth = Math.min(vw - 32, vw - 32); // 左右16pxずつのマージン
-          chatWindowRef.current.style.width = `${chatWidth}px`;
-          chatWindowRef.current.style.maxWidth = `${chatWidth}px`;
-        }
-      };
-      
-      // 即座に更新
-      updateWidth();
-      
-      // リサイズ時も更新
-      const handleResize = () => {
-        updateWidth();
-      };
-      
-      window.addEventListener('resize', handleResize);
-      window.addEventListener('orientationchange', handleResize);
-      
-      return () => {
-        window.removeEventListener('resize', handleResize);
-        window.removeEventListener('orientationchange', handleResize);
-        if (chatWindowRef.current) {
-          chatWindowRef.current.style.width = '';
-          chatWindowRef.current.style.maxWidth = '';
-        }
-      };
-    }
-  }, [isMobile, isOpen]);
+  // チャットウィンドウの幅制御は不要（left/rightで自動計算）
 
   const handleSend = () => {
     const messageText = inputValue.trim();
@@ -435,9 +393,9 @@ export default function ChatWidget() {
             position: 'fixed',
             bottom: isMobile ? `${position.y + 20}px` : undefined,
             left: isMobile ? '16px' : undefined,
-            right: isMobile ? 'auto' : undefined, // rightをautoにして、widthで制御
-            width: isMobile ? undefined : undefined, // JavaScriptで動的に設定
-            maxWidth: isMobile ? undefined : undefined, // JavaScriptで動的に設定
+            right: isMobile ? '16px' : undefined, // left/rightで幅を自動計算
+            width: isMobile ? undefined : undefined, // left/rightで自動計算
+            maxWidth: isMobile ? 'none' : undefined, // maxWidthは不要
             minWidth: isMobile ? 0 : undefined,
             maxHeight: isMobile ? `calc(100vh - ${position.y + 40}px)` : undefined,
             height: isMobile ? undefined : '600px',
@@ -445,9 +403,6 @@ export default function ChatWidget() {
             boxSizing: 'border-box',
             overflow: 'hidden',
             WebkitOverflowScrolling: 'touch',
-            // アニメーション中も確実に幅を制限
-            contain: 'layout style',
-            willChange: 'auto',
           }}
           className="md:bottom-[254px] md:left-[34px] md:right-auto md:w-96 max-w-md md:h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200"
         >
