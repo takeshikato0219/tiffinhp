@@ -172,12 +172,14 @@ export default function ChatWidget() {
   }, [isOpen]);
 
   // チャットウィンドウが開いた時にbodyのoverflowを制御（横スクロールを防ぐ）
+  // アニメーション中も確実に制御するため、即座に制御
   useEffect(() => {
     if (isMobile && isOpen) {
-      // スマホでチャットウィンドウが開いた時、横スクロールを防ぐ
+      // スマホでチャットウィンドウが開いた時、即座に横スクロールを防ぐ
       const originalBodyOverflowX = document.body.style.overflowX;
       const originalHtmlOverflowX = document.documentElement.style.overflowX;
       
+      // 即座に制御（アニメーション開始前）
       document.body.style.overflowX = 'hidden';
       document.documentElement.style.overflowX = 'hidden';
       
@@ -419,6 +421,9 @@ export default function ChatWidget() {
             boxSizing: 'border-box',
             overflow: 'hidden',
             WebkitOverflowScrolling: 'touch',
+            // アニメーション中も確実に幅を制限
+            contain: 'layout style',
+            willChange: 'auto',
           }}
           className="md:bottom-[254px] md:left-[34px] md:right-auto md:w-96 max-w-md md:h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200"
         >
