@@ -183,6 +183,7 @@ export default function ChatWidget() {
       // 元のスタイルを保存
       const bodyOriginalStyles = {
         overflow: document.body.style.overflow,
+        overflowX: document.body.style.overflowX,
         width: document.body.style.width,
         maxWidth: document.body.style.maxWidth,
         position: document.body.style.position,
@@ -195,28 +196,21 @@ export default function ChatWidget() {
       
       const htmlOriginalStyles = {
         overflow: document.documentElement.style.overflow,
+        overflowX: document.documentElement.style.overflowX,
         width: document.documentElement.style.width,
         maxWidth: document.documentElement.style.maxWidth,
       };
       
-      // bodyとhtmlの両方を制御（より確実に）
-      document.body.style.overflow = 'hidden';
+      // bodyとhtmlの両方を制御（より確実に、標準的な方法）
+      // より軽量な方法で横スクロールを防ぐ
       document.body.style.overflowX = 'hidden';
-      document.body.style.overflowY = 'hidden';
-      document.body.style.width = `${actualWidth}px`;
-      document.body.style.maxWidth = `${actualWidth}px`;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.left = '0';
-      document.body.style.right = '0';
-      document.body.style.margin = '0';
-      document.body.style.padding = '0';
+      document.body.style.position = 'relative';
+      document.body.style.width = '100%';
+      document.body.style.maxWidth = '100%';
       
-      document.documentElement.style.overflow = 'hidden';
       document.documentElement.style.overflowX = 'hidden';
-      document.documentElement.style.overflowY = 'hidden';
-      document.documentElement.style.width = `${actualWidth}px`;
-      document.documentElement.style.maxWidth = `${actualWidth}px`;
+      document.documentElement.style.width = '100%';
+      document.documentElement.style.maxWidth = '100%';
       
       // チャットウィンドウの幅も調整
       if (chatWindowRef.current) {
@@ -226,22 +220,15 @@ export default function ChatWidget() {
       }
       
       return () => {
-        // 元のスタイルを復元
-        Object.entries(bodyOriginalStyles).forEach(([key, value]) => {
-          (document.body.style as any)[key] = value || '';
-        });
+        // 元のスタイルを復元（より軽量な方法）
+        document.body.style.overflowX = bodyOriginalStyles.overflowX || '';
+        document.body.style.position = bodyOriginalStyles.position || '';
+        document.body.style.width = bodyOriginalStyles.width || '';
+        document.body.style.maxWidth = bodyOriginalStyles.maxWidth || '';
         
-        Object.entries(htmlOriginalStyles).forEach(([key, value]) => {
-          (document.documentElement.style as any)[key] = value || '';
-        });
-        
-        // 追加したスタイルをクリア
-        document.body.style.overflowX = '';
-        document.body.style.overflowY = '';
-        document.documentElement.style.overflowX = '';
-        document.documentElement.style.overflowY = '';
-        
-        window.scrollTo(0, scrollY);
+        document.documentElement.style.overflowX = htmlOriginalStyles.overflowX || '';
+        document.documentElement.style.width = htmlOriginalStyles.width || '';
+        document.documentElement.style.maxWidth = htmlOriginalStyles.maxWidth || '';
       };
     }
   }, [isMobile, isOpen, viewportWidth]);
@@ -442,7 +429,7 @@ export default function ChatWidget() {
           touchAction: isMobile ? 'pan-y' : 'auto',
           transition: isDragging ? 'none' : undefined,
         }}
-        className={`md:bottom-[156px] md:left-[34px] z-[9999] bg-teal-dark text-white w-[61px] h-[61px] md:w-[71px] md:h-[71px] shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group rounded-full ${
+        className={`md:bottom-[236px] md:left-[44px] z-[9999] bg-teal-dark text-white w-[61px] h-[61px] md:w-[71px] md:h-[71px] shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group rounded-full ${
           isOpen || isDragging ? "" : "animate-chat-float-morph-rotate"
         } ${isDragging ? 'scale-110' : ''}`}
         aria-label="チャットを開く"
@@ -478,7 +465,7 @@ export default function ChatWidget() {
             WebkitOverflowScrolling: 'touch',
             contain: 'layout style paint', // パフォーマンス最適化
           }}
-          className="md:bottom-[174px] md:left-6 md:right-auto md:w-96 max-w-md md:h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200"
+          className="md:bottom-[254px] md:left-[34px] md:right-auto md:w-96 max-w-md md:h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200"
         >
           {/* ヘッダー */}
           <div className="bg-teal-dark text-white p-3 sm:p-4 rounded-t-2xl flex items-center justify-between min-w-0">
