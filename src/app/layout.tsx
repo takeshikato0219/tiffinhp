@@ -100,6 +100,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.tiffin.one",
   },
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/logo.png', type: 'image/png', sizes: '32x32' },
+    ],
+    apple: [
+      { url: '/logo.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   verification: {
     // Google Search Console用の検証コードを追加可能
     // google: 'your-google-verification-code',
@@ -271,6 +280,10 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
+        {/* ファビコン */}
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/logo.png" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/logo.png" sizes="180x180" />
         {/* モバイル最適化 */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
         <meta name="format-detection" content="telephone=no" />
