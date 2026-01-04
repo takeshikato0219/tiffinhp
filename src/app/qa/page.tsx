@@ -112,9 +112,16 @@ export default function QAPage() {
   }, [messages]);
 
   useEffect(() => {
+    // 初期メッセージを確実に表示するため、少し遅延させてスクロール
+    const timer = setTimeout(() => {
+      scrollToBottom();
+    }, 100);
+    
     if (inputRef.current) {
       inputRef.current.focus();
     }
+    
+    return () => clearTimeout(timer);
   }, []);
 
   const handleSend = () => {
