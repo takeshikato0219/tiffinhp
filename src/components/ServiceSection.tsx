@@ -22,6 +22,9 @@ export default function ServiceSection() {
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6" style={{ fontSize: 'clamp(1.5rem, 4vw, calc(1.5rem + 5px))' }}>
             AI開発・AIウェブ開発の専門企業として実績多数
           </h2>
+          <p className="text-sm text-gray-600 max-w-4xl mx-auto mb-4 leading-relaxed">
+            画像や動画を解析して検品チェックRPA開発など実績あり
+          </p>
           <p className="text-sm text-gray-600 max-w-4xl mx-auto leading-relaxed">
             ITシステム開発とAIを融合したソリューションを提供します。
           </p>
