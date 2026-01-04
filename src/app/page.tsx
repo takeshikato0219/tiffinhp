@@ -143,7 +143,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd, null, 0) }}
       />
-      <main className="min-h-screen relative overflow-x-hidden">
+      <main className="min-h-screen relative overflow-x-hidden w-full max-w-full">
         <BackgroundCircles />
         <Header />
         <HeroSection />
