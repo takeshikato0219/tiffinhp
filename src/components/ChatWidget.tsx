@@ -243,7 +243,12 @@ export default function ChatWidget() {
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          handleChatOpen();
+          // スマホの場合はQ&Aページに遷移、PCの場合はポップアップを表示
+          if (isMobile) {
+            router.push('/qa');
+          } else {
+            setIsOpen((prev) => !prev);
+          }
         }}
         style={{
           position: 'fixed',
