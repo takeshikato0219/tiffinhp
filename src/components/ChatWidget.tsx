@@ -106,6 +106,7 @@ export default function ChatWidget() {
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const hasMovedRef = useRef(false); // ドラッグが実際に発生したかどうか
   const touchStartRef = useRef({ x: 0, y: 0 }); // タッチ開始位置
+  const isTouchEventRef = useRef(false); // タッチイベントが発生したかどうか
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   // モバイル判定
@@ -246,7 +247,9 @@ export default function ChatWidget() {
   // タッチイベント対応（モバイル）
   const handleTouchStart = (e: React.TouchEvent) => {
     if (!isMobile) return; // PCではドラッグ無効
+    e.stopPropagation(); // クリックイベントの伝播を防ぐ
     hasMovedRef.current = false;
+    isTouchEventRef.current = true;
     const touch = e.touches[0];
     touchStartRef.current = { x: touch.clientX, y: touch.clientY };
     setIsDragging(true);
@@ -292,15 +295,19 @@ export default function ChatWidget() {
     const handleTouchEnd = (e: TouchEvent) => {
       const wasDragging = hasMovedRef.current;
       setIsDragging(false);
+      
       // ドラッグが発生していない場合はクリックとして扱う
       if (!wasDragging) {
-        // クリックイベントを発火させる
-        setTimeout(() => {
-          setIsOpen((prev) => !prev);
-        }, 100);
+        // 即座にクリック処理を実行
+        setIsOpen((prev) => !prev);
       }
-      hasMovedRef.current = false;
-      touchStartRef.current = { x: 0, y: 0 };
+      
+      // 少し遅延させてからリセット（クリックイベントとの競合を避ける）
+      setTimeout(() => {
+        hasMovedRef.current = false;
+        isTouchEventRef.current = false;
+        touchStartRef.current = { x: 0, y: 0 };
+      }, 50);
     };
 
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
@@ -318,17 +325,16 @@ export default function ChatWidget() {
       <button
         ref={buttonRef}
         onClick={(e) => {
-          // モバイルでドラッグが発生した場合はクリックを無視
-          if (isMobile && hasMovedRef.current) {
+          // モバイルでタッチイベントが発生した場合はクリックを無視
+          if (isMobile && isTouchEventRef.current) {
             e.preventDefault();
             e.stopPropagation();
             return;
           }
-          // PCでは常にクリック
-          if (!isMobile) {
+          // PCでは常にクリック、モバイルでタッチイベントが発生していない場合のみクリック
+          if (!isMobile || !isTouchEventRef.current) {
             setIsOpen((prev) => !prev);
           }
-          // モバイルではhandleTouchEndで処理されるため、ここでは処理しない
         }}
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
@@ -337,7 +343,7 @@ export default function ChatWidget() {
           bottom: isMobile ? `${position.y}px` : undefined,
           left: isMobile ? `${position.x}px` : undefined,
           cursor: isMobile ? (isDragging ? 'grabbing' : 'grab') : 'pointer',
-          touchAction: isMobile ? 'manipulation' : 'auto',
+          touchAction: isMobile ? 'pan-y' : 'auto',
           transition: isDragging ? 'none' : undefined,
         }}
         className={`md:bottom-[156px] md:left-[34px] z-[9999] bg-teal-dark text-white w-[61px] h-[61px] md:w-[71px] md:h-[71px] shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group rounded-full ${
