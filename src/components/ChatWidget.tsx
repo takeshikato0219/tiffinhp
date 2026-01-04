@@ -136,27 +136,48 @@ export default function ChatWidget() {
   // チャットウィンドウが開いた時にbodyのoverflowを制御
   useEffect(() => {
     if (isMobile && isOpen) {
-      // スマホでチャットウィンドウが開いた時、bodyのoverflowを制御
+      // スマホでチャットウィンドウが開いた時、bodyとhtmlのoverflowを制御
       const scrollY = window.scrollY;
-      const originalOverflow = document.body.style.overflow;
-      const originalWidth = document.body.style.width;
-      const originalPosition = document.body.style.position;
-      const originalTop = document.body.style.top;
+      const bodyOriginalOverflow = document.body.style.overflow;
+      const bodyOriginalWidth = document.body.style.width;
+      const bodyOriginalPosition = document.body.style.position;
+      const bodyOriginalTop = document.body.style.top;
+      const bodyOriginalLeft = document.body.style.left;
+      const bodyOriginalRight = document.body.style.right;
       
+      const htmlOriginalOverflow = document.documentElement.style.overflow;
+      const htmlOriginalWidth = document.documentElement.style.width;
+      
+      // bodyとhtmlの両方を制御
       document.body.style.overflow = 'hidden';
       document.body.style.width = '100%';
+      document.body.style.maxWidth = '100%';
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
       document.body.style.left = '0';
       document.body.style.right = '0';
+      document.body.style.margin = '0';
+      document.body.style.padding = '0';
+      
+      document.documentElement.style.overflow = 'hidden';
+      document.documentElement.style.width = '100%';
+      document.documentElement.style.maxWidth = '100%';
       
       return () => {
-        document.body.style.overflow = originalOverflow;
-        document.body.style.width = originalWidth;
-        document.body.style.position = originalPosition;
-        document.body.style.top = originalTop;
-        document.body.style.left = '';
-        document.body.style.right = '';
+        document.body.style.overflow = bodyOriginalOverflow;
+        document.body.style.width = bodyOriginalWidth;
+        document.body.style.maxWidth = '';
+        document.body.style.position = bodyOriginalPosition;
+        document.body.style.top = bodyOriginalTop;
+        document.body.style.left = bodyOriginalLeft;
+        document.body.style.right = bodyOriginalRight;
+        document.body.style.margin = '';
+        document.body.style.padding = '';
+        
+        document.documentElement.style.overflow = htmlOriginalOverflow;
+        document.documentElement.style.width = htmlOriginalWidth;
+        document.documentElement.style.maxWidth = '';
+        
         window.scrollTo(0, scrollY);
       };
     }
@@ -382,14 +403,15 @@ export default function ChatWidget() {
             bottom: isMobile ? `${position.y + 20}px` : undefined,
             left: isMobile ? '16px' : undefined,
             right: isMobile ? '16px' : undefined,
-            width: isMobile ? 'calc(100% - 32px)' : undefined,
-            maxWidth: isMobile ? 'calc(100% - 32px)' : undefined,
+            width: isMobile ? 'calc(100vw - 32px)' : undefined,
+            maxWidth: isMobile ? 'calc(100vw - 32px)' : undefined,
             minWidth: isMobile ? 0 : undefined,
             maxHeight: isMobile ? `calc(100vh - ${position.y + 40}px)` : undefined,
             height: isMobile ? undefined : '600px',
             zIndex: 9999,
             boxSizing: 'border-box',
             overflow: 'hidden',
+            WebkitOverflowScrolling: 'touch',
           }}
           className="md:bottom-[174px] md:left-6 md:right-auto md:w-96 max-w-md md:h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200"
         >
