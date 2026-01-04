@@ -104,20 +104,58 @@ export default function ChatWidget() {
   const [position, setPosition] = useState({ x: 26, y: 126 }); // モバイルの初期位置: left 26px, bottom 126px (50px上げる)
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [viewportWidth, setViewportWidth] = useState(0); // 実際のビューポート幅
   const hasMovedRef = useRef(false); // ドラッグが実際に発生したかどうか
   const touchStartRef = useRef({ x: 0, y: 0 }); // タッチ開始位置
   const isTouchEventRef = useRef(false); // タッチイベントが発生したかどうか
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const chatWindowRef = useRef<HTMLDivElement>(null);
 
-  // モバイル判定
+  // モバイル判定とビューポート幅の取得
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
+    const getViewportWidth = () => {
+      // 実際のビューポート幅を取得（スクロールバーを除く）
+      // SafariとChromeの両方で動作する方法
+      const docEl = document.documentElement;
+      const body = document.body;
+      return Math.max(
+        docEl.clientWidth || 0,
+        body.clientWidth || 0,
+        window.innerWidth || 0
+      );
     };
+
+    const checkMobile = () => {
+      const width = getViewportWidth();
+      setIsMobile(width < 1024);
+      setViewportWidth(width);
+      
+      // チャットウィンドウが開いている場合は幅を更新
+      if (isOpen && isMobile && chatWindowRef.current) {
+        const chatWidth = width - 32;
+        chatWindowRef.current.style.width = `${chatWidth}px`;
+        chatWindowRef.current.style.maxWidth = `${chatWidth}px`;
+      }
+    };
+    
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+    
+    const handleResize = () => {
+      // リサイズ時に少し遅延させて正確な幅を取得
+      setTimeout(checkMobile, 50);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
+    
+    // 初期化時に少し遅延させて正確な幅を取得
+    setTimeout(checkMobile, 100);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
+  }, [isOpen, isMobile]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -136,22 +174,37 @@ export default function ChatWidget() {
   // チャットウィンドウが開いた時にbodyのoverflowを制御
   useEffect(() => {
     if (isMobile && isOpen) {
+      // 実際のビューポート幅を取得
+      const actualWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+      
       // スマホでチャットウィンドウが開いた時、bodyとhtmlのoverflowを制御
       const scrollY = window.scrollY;
-      const bodyOriginalOverflow = document.body.style.overflow;
-      const bodyOriginalWidth = document.body.style.width;
-      const bodyOriginalPosition = document.body.style.position;
-      const bodyOriginalTop = document.body.style.top;
-      const bodyOriginalLeft = document.body.style.left;
-      const bodyOriginalRight = document.body.style.right;
       
-      const htmlOriginalOverflow = document.documentElement.style.overflow;
-      const htmlOriginalWidth = document.documentElement.style.width;
+      // 元のスタイルを保存
+      const bodyOriginalStyles = {
+        overflow: document.body.style.overflow,
+        width: document.body.style.width,
+        maxWidth: document.body.style.maxWidth,
+        position: document.body.style.position,
+        top: document.body.style.top,
+        left: document.body.style.left,
+        right: document.body.style.right,
+        margin: document.body.style.margin,
+        padding: document.body.style.padding,
+      };
       
-      // bodyとhtmlの両方を制御
+      const htmlOriginalStyles = {
+        overflow: document.documentElement.style.overflow,
+        width: document.documentElement.style.width,
+        maxWidth: document.documentElement.style.maxWidth,
+      };
+      
+      // bodyとhtmlの両方を制御（より確実に）
       document.body.style.overflow = 'hidden';
-      document.body.style.width = '100%';
-      document.body.style.maxWidth = '100%';
+      document.body.style.overflowX = 'hidden';
+      document.body.style.overflowY = 'hidden';
+      document.body.style.width = `${actualWidth}px`;
+      document.body.style.maxWidth = `${actualWidth}px`;
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
       document.body.style.left = '0';
@@ -160,28 +213,38 @@ export default function ChatWidget() {
       document.body.style.padding = '0';
       
       document.documentElement.style.overflow = 'hidden';
-      document.documentElement.style.width = '100%';
-      document.documentElement.style.maxWidth = '100%';
+      document.documentElement.style.overflowX = 'hidden';
+      document.documentElement.style.overflowY = 'hidden';
+      document.documentElement.style.width = `${actualWidth}px`;
+      document.documentElement.style.maxWidth = `${actualWidth}px`;
+      
+      // チャットウィンドウの幅も調整
+      if (chatWindowRef.current) {
+        const chatWidth = actualWidth - 32; // 16px * 2
+        chatWindowRef.current.style.width = `${chatWidth}px`;
+        chatWindowRef.current.style.maxWidth = `${chatWidth}px`;
+      }
       
       return () => {
-        document.body.style.overflow = bodyOriginalOverflow;
-        document.body.style.width = bodyOriginalWidth;
-        document.body.style.maxWidth = '';
-        document.body.style.position = bodyOriginalPosition;
-        document.body.style.top = bodyOriginalTop;
-        document.body.style.left = bodyOriginalLeft;
-        document.body.style.right = bodyOriginalRight;
-        document.body.style.margin = '';
-        document.body.style.padding = '';
+        // 元のスタイルを復元
+        Object.entries(bodyOriginalStyles).forEach(([key, value]) => {
+          (document.body.style as any)[key] = value || '';
+        });
         
-        document.documentElement.style.overflow = htmlOriginalOverflow;
-        document.documentElement.style.width = htmlOriginalWidth;
-        document.documentElement.style.maxWidth = '';
+        Object.entries(htmlOriginalStyles).forEach(([key, value]) => {
+          (document.documentElement.style as any)[key] = value || '';
+        });
+        
+        // 追加したスタイルをクリア
+        document.body.style.overflowX = '';
+        document.body.style.overflowY = '';
+        document.documentElement.style.overflowX = '';
+        document.documentElement.style.overflowY = '';
         
         window.scrollTo(0, scrollY);
       };
     }
-  }, [isMobile, isOpen]);
+  }, [isMobile, isOpen, viewportWidth]);
 
   const handleSend = () => {
     const messageText = inputValue.trim();
@@ -398,13 +461,14 @@ export default function ChatWidget() {
       {/* チャットウィンドウ */}
       {isOpen && (
         <div 
+          ref={chatWindowRef}
           style={{
             position: 'fixed',
             bottom: isMobile ? `${position.y + 20}px` : undefined,
             left: isMobile ? '16px' : undefined,
             right: isMobile ? '16px' : undefined,
-            width: isMobile ? 'calc(100vw - 32px)' : undefined,
-            maxWidth: isMobile ? 'calc(100vw - 32px)' : undefined,
+            width: isMobile ? (viewportWidth > 0 ? `${viewportWidth - 32}px` : 'calc(100% - 32px)') : undefined,
+            maxWidth: isMobile ? (viewportWidth > 0 ? `${viewportWidth - 32}px` : 'calc(100% - 32px)') : undefined,
             minWidth: isMobile ? 0 : undefined,
             maxHeight: isMobile ? `calc(100vh - ${position.y + 40}px)` : undefined,
             height: isMobile ? undefined : '600px',
@@ -412,6 +476,7 @@ export default function ChatWidget() {
             boxSizing: 'border-box',
             overflow: 'hidden',
             WebkitOverflowScrolling: 'touch',
+            contain: 'layout style paint', // パフォーマンス最適化
           }}
           className="md:bottom-[174px] md:left-6 md:right-auto md:w-96 max-w-md md:h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col border border-gray-200"
         >

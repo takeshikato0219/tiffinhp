@@ -26,17 +26,33 @@
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     /* 横スクロールを防ぐ */
-    overflow-x: hidden;
+    overflow-x: hidden !important;
+    overflow-y: auto;
     width: 100%;
     max-width: 100vw;
     position: relative;
+    margin: 0;
+    padding: 0;
   }
 
   html {
-    overflow-x: hidden;
+    overflow-x: hidden !important;
+    overflow-y: auto;
     width: 100%;
     max-width: 100vw;
     position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* 全ての要素で横スクロールを防ぐ */
+  * {
+    max-width: 100%;
+  }
+
+  /* 固定要素も含めて横スクロールを防ぐ */
+  [style*="position: fixed"] {
+    max-width: 100vw;
   }
 
   h1, h2, h3, h4, h5, h6 {
