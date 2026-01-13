@@ -104,7 +104,7 @@ export default function QAPage() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   };
 
   useEffect(() => {
@@ -114,17 +114,6 @@ export default function QAPage() {
   useEffect(() => {
     // ページが一番上からスタートするようにスクロール位置をリセット
     window.scrollTo(0, 0);
-    
-    // 初期メッセージを確実に表示するため、少し遅延させてスクロール
-    const timer = setTimeout(() => {
-      scrollToBottom();
-    }, 100);
-    
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-    
-    return () => clearTimeout(timer);
   }, []);
 
   const handleSend = () => {
@@ -166,7 +155,7 @@ export default function QAPage() {
   return (
     <main className="min-h-screen flex flex-col relative bg-white">
       <Header />
-      <section className="pt-20 sm:pt-32 pb-4 sm:pb-20 bg-white relative z-10 flex-grow">
+      <section className="pt-20 sm:pt-32 pb-4 sm:pb-8 bg-white relative z-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-4 sm:mb-8">
           <Breadcrumb items={[{ label: "Q&A", href: "/qa" }]} />
           <h1 className="text-xl sm:text-2xl font-bold text-gray-900 tracking-wider mb-4 sm:mb-8">
@@ -176,7 +165,7 @@ export default function QAPage() {
         
         {/* チャットエリア */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 flex flex-col" style={{ height: 'calc(50vh - 100px)', minHeight: '300px', maxHeight: 'calc(50vh - 90px)' }}>
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 flex flex-col" style={{ height: '350px', minHeight: '250px', maxHeight: '350px' }}>
             {/* メッセージエリア */}
             <div className="flex-1 overflow-y-auto p-2 sm:p-6 space-y-1.5 sm:space-y-4 bg-gray-50 min-w-0" style={{ WebkitOverflowScrolling: 'touch' }}>
               {messages.map((message) => (

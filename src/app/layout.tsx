@@ -102,7 +102,6 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' },
       { url: '/favicon.svg', type: 'image/svg+xml' },
     ],
     apple: [
@@ -281,7 +280,6 @@ export default function RootLayout({
     <html lang="ja">
       <head>
         {/* ファビコン */}
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
         {/* モバイル最適化 */}
