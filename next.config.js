@@ -14,10 +14,8 @@ const nextConfig = {
       { source: '/news.php', destination: '/news', permanent: true },
       { source: '/index.php', destination: '/', permanent: true },
 
-      // WordPress関連のリダイレクト（クエリパラメータ含む）
-      { source: '/wp', destination: '/', permanent: true },
-      { source: '/wp/', destination: '/', permanent: true },
-      { source: '/wp/:path*', destination: '/', permanent: true },
+      // WordPress関連のリダイレクト - middlewareで処理するため削除
+      // クエリパラメータ付きURLはmiddlewareで処理
 
       // feedのリダイレクト（サブパスも含む）
       { source: '/feed', destination: '/', permanent: true },
@@ -38,12 +36,6 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'], // モダンな画像フォーマットを使用
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    domains: [
-      "source.unsplash.com",
-      "images.unsplash.com",
-      "ext.same-assets.com",
-      "ugc.same-assets.com",
-    ],
     remotePatterns: [
       {
         protocol: "https",
