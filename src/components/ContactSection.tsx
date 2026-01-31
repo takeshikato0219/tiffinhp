@@ -41,7 +41,7 @@ export default function ContactSection() {
     setSubmitStatus("idle");
     setErrorMessage("");
 
-    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_47wjggu";
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_jl7zgsr";
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_w9gma4c";
 
     try {

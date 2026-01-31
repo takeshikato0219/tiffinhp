@@ -11,7 +11,7 @@ template_w9gma4c
 
 ### Service ID
 ```
-service_47wjggu
+service_jl7zgsr
 ```
 
 ### Public Key
@@ -26,7 +26,7 @@ service_47wjggu
 ```env
 # EmailJS設定
 NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=62fy23UHQA1peUUj7
-NEXT_PUBLIC_EMAILJS_SERVICE_ID=service_47wjggu
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=service_jl7zgsr
 NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=template_w9gma4c
 ```
 
@@ -79,7 +79,7 @@ template_w9gma4c
 AWS Amplify、ECS、Lambdaなどにデプロイする場合は、環境変数を以下のように設定してください：
 
 - `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=62fy23UHQA1peUUj7`
-- `NEXT_PUBLIC_EMAILJS_SERVICE_ID=service_47wjggu`
+- `NEXT_PUBLIC_EMAILJS_SERVICE_ID=service_jl7zgsr`
 - `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=template_w9gma4c`
 
 ## セキュリティ注意事項
