@@ -111,7 +111,7 @@ export default function CompanyPage() {
                     TIFFIN株式会社は、領域に特化したAIプロダクト「AI Workerシリーズ」を提供しています。
                     <strong>TimeWorks</strong>（勤怠管理・シフト管理）、<strong>アキヤー</strong>（AI空き家探索）、
                     <strong>CARSELL</strong>（自動車販売業界向け営業支援AI）、<strong>BuzzShield</strong>（SNS監視AI）、
-                    <strong>akari voice</strong>（音声合成サービス）など、様々な業界・領域に特化したAIプロダクトを開発・リリースしています。
+                    <strong>akari voice</strong>（音声合成サービス）、<strong>AI DRIVE</strong>（ドライブスルーAI）など、様々な業界・領域に特化したAIプロダクトを開発・リリースしています。
                   </p>
                   <p className="text-sm text-gray-700 leading-relaxed">
                     これらのプロダクトは、実際のビジネス課題を解決するために開発され、多くの企業で活用されています。

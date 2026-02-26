@@ -274,6 +274,23 @@ export default function ServiceSection() {
               </p>
               <span className="text-xs text-yellow font-medium">1月末ローンチ予定</span>
               </Link>
+
+            {/* AI DRIVE */}
+            <Link href="https://www.drive-through.ai/" target="_blank" rel="noopener noreferrer" className="block bg-gray-light rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 tab-hover">
+              <div className="flex items-center gap-2 text-xs text-white bg-teal-muted rounded px-2 py-1 w-fit mb-3">
+                ドライブスルーAI
+            </div>
+              <div className="flex items-center gap-3 mb-2">
+                <svg className="w-10 h-10 text-teal-light flex-shrink-0" viewBox="0 0 40 40" fill="none">
+                  <path d="M20 5L35 15L20 25L5 15L20 5Z" stroke="currentColor" strokeWidth="2"/>
+                  <path d="M5 25L20 35L35 25" stroke="currentColor" strokeWidth="2"/>
+                </svg>
+                <span className="text-2xl font-bold text-gray-900">AI DRIVE</span>
+                </div>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                AI音声認識でドライブスルー注文を自動化。98%以上の認識精度で方言や早口にも対応し、24時間安定稼働で人件費削減と顧客満足度向上を実現します。
+              </p>
+              </Link>
           </div>
         </div>
       </div>
