@@ -16,6 +16,15 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
+    date: "2025.02.26",
+    category: "サービスリリース",
+    categoryType: "press",
+    title: 'ドライブスルーAIシステム「AI DRIVE」をリリース',
+    description: "AI音声認識でドライブスルー注文を自動化。98%以上の認識精度で方言や早口にも対応し、24時間安定稼働で人件費削減と顧客満足度向上を実現します。",
+    link: "https://www.drive-through.ai/",
+    tags: ["AI DRIVE", "ドライブスルー", "音声AI"],
+  },
+  {
     date: "2025.01.15",
     category: "サービスリリース",
     categoryType: "press",
@@ -116,7 +125,7 @@ export default function NewsSection() {
                     className="text-xs text-teal-dark hover:text-teal-dark/80 transition-colors inline-flex items-center gap-1 font-medium"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    {item.title.includes('TimeWorks') ? 'TimeWorksの詳細を見る' : item.title.includes('アキヤー') ? 'アキヤーの詳細を見る' : item.title.includes('CARSELL') ? 'CARSELLの詳細を見る' : '詳細を見る'}
+                    {item.title.includes('AI DRIVE') ? 'AI DRIVEの詳細を見る' : item.title.includes('TimeWorks') ? 'TimeWorksの詳細を見る' : item.title.includes('アキヤー') ? 'アキヤーの詳細を見る' : item.title.includes('CARSELL') ? 'CARSELLの詳細を見る' : '詳細を見る'}
                     <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>

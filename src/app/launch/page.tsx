@@ -18,6 +18,15 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
+    date: "2025.02.26",
+    category: "サービスリリース",
+    categoryType: "press",
+    title: 'ドライブスルーAIシステム「AI DRIVE」をリリース',
+    description: "AI音声認識でドライブスルー注文を自動化。98%以上の認識精度で方言や早口にも対応し、24時間安定稼働で人件費削減と顧客満足度向上を実現します。",
+    link: "https://www.drive-through.ai/",
+    tags: ["AI DRIVE", "ドライブスルー", "音声AI"],
+  },
+  {
     date: "2025.01.15",
     category: "サービスリリース",
     categoryType: "press",
