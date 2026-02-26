@@ -303,7 +303,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         {children}
-        {/* Google tag (gtag.js) */}
+        {/* Google tag (gtag.js) - GA4 + Google Ads */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-RTK4L38SC0"
           strategy="afterInteractive"
@@ -314,6 +314,7 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-RTK4L38SC0');
+            gtag('config', 'AW-2703412172');
           `}
         </Script>
       </body>
